@@ -59,7 +59,7 @@ p {
   width: 90vw;
   max-width: 1700px;
   height: 720px;
-  padding: 32px 40px;    
+  padding: 32px 40px;
   overflow: hidden;
 }
 
@@ -79,6 +79,8 @@ p {
   border-radius: 24px;
   object-fit: fill;
   display: flex;
+  opacity: 0; 
+  animation: fadeInImagen 1s ease-out forwards;
 }
 
 .lado-izquierdo {
@@ -94,6 +96,7 @@ p {
   padding-top: 90px;
   display: flex;
   flex-direction: column;
+  animation: fadeInFormulario 1s ease-out forwards;
 }
 
 .puntos {
@@ -110,6 +113,7 @@ p {
 }
 
 .punto-activo {
+  transition: background-color 0.8s ease;
   background-color: #02b557;
 }
 
@@ -200,9 +204,9 @@ p {
   color: #14924f;
 }
 
-.boton-enviar {
+.boton-siguiente {
   margin-top: 4px;
-  padding: 10px 0;
+  padding: 10px 24px; 
   border-radius: 10px;
   border: none;
   background-color: #02b557;
@@ -212,12 +216,33 @@ p {
   height: 40px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-
 }
 
-.boton-enviar:hover {
-  transition: 0.2s;
+
+.boton-siguiente:hover {
   background-color: #14924f;
+}
+
+.fila-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  width: 100%;            
+}
+
+
+.fila-botones .boton-siguiente {
+  flex: 1;                
+  text-align: center;
+}
+
+.boton-atras {
+  background-color: #b3b3b3;
+  transition: background-color 0.2s ease;
+}
+
+.boton-atras:hover {
+  background-color: #8f8f8f;
 }
 
 
@@ -273,5 +298,27 @@ p {
     flex-wrap: wrap;
     gap: 16px;
     font-size: 16px;
+  }
+}
+
+@keyframes fadeInImagen {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFormulario {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
