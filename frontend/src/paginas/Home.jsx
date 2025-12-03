@@ -18,7 +18,7 @@ function Home() {
           <Link to="/perfil">Perfil</Link>
           
           {/* --- MANTENIDO: EL ENLACE A LOGIN --- */}
-          <Link to="/LogIn" className="enlace-verde">Iniciar Sesión</Link>
+          <Link to="/LogIn" className="enlace-verde">Iniciar sesión</Link>
         
         </nav>
         

@@ -22,10 +22,12 @@ body {
 /* --- BARRA DE NAVEGACIÓN --- */
 .barra-navegacion {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
-  padding: 30px 72px; 
-  background-color: #d5f0d8; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 72px;
+  margin-right: 60px;
 }
 
 .enlaces-navegacion {

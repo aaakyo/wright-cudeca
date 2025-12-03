@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
-import "../cudeca.css";
+import "../cudecaRegistro.css";
 
 function Registro() {
   const [paso, setPaso] = useState(1);
@@ -39,7 +39,7 @@ function Registro() {
   };
 
   return (
-    <div className="pagina">
+    <div className="pagina-registro">
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
