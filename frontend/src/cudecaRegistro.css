@@ -198,6 +198,7 @@
 
 .pagina-registro .boton-siguiente {
   margin-top: 4px;
+  font-family: Inter Tight, sans-serif;
   padding: 10px 24px;
   border-radius: 10px;
   border: none;
@@ -227,6 +228,7 @@
 }
 
 .pagina-registro .boton-atras {
+    font-family: Inter Tight, sans-serif;
   background-color: #b3b3b3;
   transition: background-color 0.2s ease;
 }

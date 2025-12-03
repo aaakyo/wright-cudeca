@@ -234,6 +234,7 @@ body {
 
 .btn-editar-top {
   background-color: white;
+  font-family: Inter Tight, sans-serif;
   border: 1px solid #ddd;
   padding: 10px 20px;
   border-radius: 8px;
@@ -302,6 +303,7 @@ body {
 
 .input-gris {
   width: 100%;
+  font-family: "Inter Tight", sans-serif;
   background-color: #f5f5f5;
   border: none;
   border-radius: 12px;
@@ -430,6 +432,7 @@ body {
 }
 
 .buscador input {
+  font-family: inter Tight, sans-serif;
   width: 100%;
   padding: 10px 40px 10px 15px;
   border-radius: 8px;
@@ -544,6 +547,7 @@ body {
 
 .btn-comprar {
   background-color: #02b557;
+  font-family: inter Tight, sans-serif;
   color: white;
   border: none;
   padding: 10px 20px;
