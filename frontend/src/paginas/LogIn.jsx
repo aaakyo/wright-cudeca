@@ -24,10 +24,7 @@ function Login() {
 
   return (
     <div className="pagina">
-      {/* --- ESTILOS TEMPORALES PARA PREVISUALIZACIÓN --- */}
-      {/* Cuando lleves esto a VS Code, BORRA este bloque <style> y usa el import "../cudeca.css" */}
-    
-
+     
       {/* --- BARRA DE NAVEGACIÓN --- */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
@@ -39,6 +36,10 @@ function Login() {
             Iniciar sesión
           </Link>
         </nav>
+        {/* AÑADIDO: El logo a la derecha, igual que en la Home */}
+        <div className="logo">
+           <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
+        </div>
       </header>
 
       <main className="contenido">
