@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
-import "../cudeca.css";
+import "../cudecaRegistro.css";
 
 function Registro() {
   const [paso, setPaso] = useState(1);
@@ -39,21 +39,18 @@ function Registro() {
   };
 
   return (
-    <div className="pagina">
-      {/* BARRA DE NAVEGACIÓN */}
+    <div className="pagina-registro">
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
-          <a href="#">Eventos</a>
-          <a href="#">Perfil</a>
-          {/* En la página de registro, "Iniciar Sesión" es un enlace normal */}
+          <Link to="/eventos">Eventos</Link>
+          <Link to="/perfil">Perfil</Link>
           <Link to="/login" className="enlace-verde">
             Iniciar sesión
           </Link>
         </nav>
-        
-        {/* AÑADIDO: El logo a la derecha, igual que en la Home */}
+
         <div className="logo">
            <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
         </div>
