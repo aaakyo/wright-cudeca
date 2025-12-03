@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; // <--- CAMBIO 1: Importamos herramientas de navegación
+import { useNavigate, Link } from "react-router-dom"; 
 import "../cudeca.css";
 
 function Registro() {
   const [paso, setPaso] = useState(1);
-  const navigate = useNavigate(); // <--- CAMBIO 2: Inicializamos el "navegador"
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -27,35 +27,39 @@ function Registro() {
 
   const handleSubmitPaso2 = (e) => {
     e.preventDefault();
-
     if (!formData.contraseña || formData.contraseña !== formData.contraseñaConfirmada) {
       alert("Las contraseñas no coinciden");
       return;
     }
-
     setPaso(3);
   };
 
   const irAlInicio = () => {
-    navigate("/"); // <--- CAMBIO 3: Ahora nos lleva a la Home de verdad
+    navigate("/");
   };
 
   return (
     <div className="pagina">
+      {/* BARRA DE NAVEGACIÓN */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
-          {/* CAMBIO EXTRA: Usamos Link en lugar de a href para Inicio */}
-          <Link to="/">Inicio</Link> 
+          <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
           <a href="#">Eventos</a>
           <a href="#">Perfil</a>
-          <a href="#" className="enlace-activo">
+          {/* En la página de registro, "Iniciar Sesión" es un enlace normal */}
+          <Link to="/login" className="enlace-verde">
             Iniciar sesión
-          </a>
+          </Link>
         </nav>
+        
+        {/* AÑADIDO: El logo a la derecha, igual que en la Home */}
+        <div className="logo">
+           <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
+        </div>
       </header>
 
-      {/* ... EL RESTO DE TU CÓDIGO SIGUE EXACTAMENTE IGUAL ... */}
+      {/* CONTENIDO CENTRAL */}
       <main className="contenido">
         <div className="tarjeta-registro">
           <div className="lado-izquierdo">
@@ -79,68 +83,39 @@ function Registro() {
               <>
                 <h1 className="titulo-formulario">Registrarse</h1>
                 <p className="subtitulo-formulario">
-                  ¿Ya tiene una cuenta? <a href="#">Inicie sesión</a>
+                  ¿Ya tiene una cuenta? <Link to="/login">Inicie sesión</Link>
                 </p>
 
                 <form className="formulario-registro" onSubmit={handleSubmitPaso1}>
-                   {/* ... Mismo contenido del formulario paso 1 ... */}
                   <div className="fila-formulario">
                     <div className="grupo-campo">
                       <label>Nombre</label>
-                      <input
-                        type="text"
-                        name="nombre"
-                        placeholder="Nombre"
-                        value={formData.nombre}
-                        onChange={handleChange}
-                      />
+                      <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
                     </div>
-
                     <div className="grupo-campo">
                       <label>Apellidos</label>
-                      <input
-                        type="text"
-                        name="apellidos"
-                        placeholder="Apellidos"
-                        value={formData.apellidos}
-                        onChange={handleChange}
-                      />
+                      <input type="text" name="apellidos" placeholder="Apellidos" value={formData.apellidos} onChange={handleChange} />
                     </div>
                   </div>
 
                   <div className="grupo-campo">
                     <label>Correo electrónico</label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Correo electrónico"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
+                    <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} />
                   </div>
 
                   <div className="grupo-campo">
                     <label>Teléfono (opcional)</label>
-                    <input
-                      type="tel"
-                      name="telefono"
-                      placeholder="Teléfono"
-                      value={formData.telefono}
-                      onChange={handleChange}
-                    />
+                    <input type="tel" name="telefono" placeholder="Teléfono" value={formData.telefono} onChange={handleChange} />
                   </div>
 
                   <div className="checkbox-formulario">
                     <input type="checkbox" id="terminos" />
                     <label htmlFor="terminos">
-                      He leído y acepto la{" "}
-                      <a href="#">política de términos y condiciones de CUDECA</a>
+                      He leído y acepto la <a href="#">política de términos y condiciones de CUDECA</a>
                     </label>
                   </div>
 
-                  <button type="submit" className="boton-siguiente">
-                    Siguiente
-                  </button>
+                  <button type="submit" className="boton-siguiente">Siguiente</button>
                 </form>
               </>
             )}
@@ -148,43 +123,19 @@ function Registro() {
             {paso === 2 && (
               <>
                 <h1 className="titulo-formulario">¡Ya casi estás!</h1>
-                <p className="subtitulo-formulario">
-                  Establezca y confirme su contraseña.
-                </p>
-
+                <p className="subtitulo-formulario">Establezca y confirme su contraseña.</p>
                 <form className="formulario-registro" onSubmit={handleSubmitPaso2}>
-                   {/* ... Mismo contenido del formulario paso 2 ... */}
                   <div className="grupo-campo">
                     <label>Contraseña</label>
-                    <input
-                      type="password"
-                      name="contraseña"
-                      placeholder="Contraseña"
-                      value={formData.contraseña}
-                      onChange={handleChange}
-                    />
+                    <input type="password" name="contraseña" placeholder="Contraseña" value={formData.contraseña} onChange={handleChange} />
                   </div>
-
                   <div className="grupo-campo">
                     <label>Repetir contraseña</label>
-                    <input
-                      type="password"
-                      name="contraseñaConfirmada"
-                      placeholder="Contraseña"
-                      value={formData.contraseñaConfirmada}
-                      onChange={handleChange}
-                    />
+                    <input type="password" name="contraseñaConfirmada" placeholder="Contraseña" value={formData.contraseñaConfirmada} onChange={handleChange} />
                   </div>
-
                   <div className="fila-botones">
-                    <button
-                      type="button"
-                      className="boton-siguiente boton-atras" onClick={() => setPaso(1)}>
-                      Atrás
-                    </button>
-                    <button type="submit" className="boton-siguiente">
-                      Siguiente
-                    </button>
+                    <button type="button" className="boton-siguiente boton-atras" onClick={() => setPaso(1)}>Atrás</button>
+                    <button type="submit" className="boton-siguiente">Siguiente</button>
                   </div>
                 </form>
               </>
@@ -193,13 +144,8 @@ function Registro() {
             {paso === 3 && (
               <>
                 <h1 className="titulo-formulario">¡Listo!</h1>
-                <p className="subtitulo-formulario">
-                  Se ha registrado con éxito, ya puede volver a la página principal.
-                </p>
-
-                <button type="button" className="boton-siguiente" onClick={irAlInicio}> 
-                  Ir al inicio
-                </button>
+                <p className="subtitulo-formulario">Se ha registrado con éxito, ya puede volver a la página principal.</p>
+                <button type="button" className="boton-siguiente" onClick={irAlInicio}>Ir al inicio</button>
               </>
             )}
           </div>
