@@ -6,16 +6,18 @@ function Home() {
   return (
     <div className="pagina">
       
+      {/* 1. BARRA DE NAVEGACIÓN */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
           
-          {/* --- CORRECCIÓN AQUÍ: Cambiamos <a> por <Link> --- */}
+          {/* Mantenemos TU enlace de Eventos */}
           <Link to="/eventos">Eventos</Link>
           
           <a href="#">Perfil</a>
-          <Link to="/registro" className="enlace-verde">Iniciar Sesión</Link>
+          {/* Aceptamos el cambio de tu compañero: ahora lleva al Login real */}
+          <Link to="/login" className="enlace-verde">Iniciar Sesión</Link>
         </nav>
         
         <div className="logo">

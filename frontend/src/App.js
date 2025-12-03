@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Registro from "./paginas/registro.jsx";
 import Home from "./paginas/Home.jsx";
-import Eventos from "./paginas/Eventos.jsx"; // 1. IMPORTAR
+import Eventos from "./paginas/Eventos.jsx"; // Mantenemos TU importación
+import Login from "./paginas/LogIn.jsx";     // Aceptamos SU importación
 
 function App() {
   return (
@@ -9,9 +10,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/login" element={<Registro />} /> {/* Truco: Login lleva a registro por ahora */}
         
-        {/* 2. AÑADIR RUTA */}
+        {/* Ruta de Login (Lo nuevo de tu compañero) */}
+        <Route path="/login" element={<Login />} />
+        
+        {/* Ruta de Eventos (Lo nuevo tuyo) */}
         <Route path="/eventos" element={<Eventos />} />
       </Routes>
     </Router>
