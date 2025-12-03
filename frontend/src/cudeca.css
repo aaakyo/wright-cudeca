@@ -216,3 +216,178 @@ body {
   .lado-izquierdo { display: none; }
   .barra-navegacion { padding: 20px; }
 }
+
+/* --- PÁGINA DE EVENTOS --- */
+.contenido-eventos {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  width: 100%;
+}
+
+.contenedor-lista-eventos {
+  background-color: #f9f9f9; /* Casi blanco */
+  width: 100%;
+  max-width: 1200px;
+  height: 80vh; /* Ocupa el 80% de la altura de la pantalla */
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* CABECERA (Título y Buscador) */
+.cabecera-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.cabecera-lista h1 {
+  font-family: "Inter Tight", sans-serif; /* Según tu diseño parece Inter, no Poppins */
+  font-size: 32px;
+  margin: 0;
+  color: #000;
+}
+
+.buscador {
+  position: relative;
+  width: 300px;
+}
+
+.buscador input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+}
+
+.buscador .lupa {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+/* LISTA CON SCROLL */
+.lista-scroll {
+  flex: 1; /* Ocupa el resto del espacio */
+  overflow-y: auto; /* Hace que aparezca la barra de scroll si hay muchos */
+  padding-right: 10px; /* Espacio para que el scroll no tape contenido */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* TARJETA INDIVIDUAL */
+.tarjeta-evento {
+  background-color: white;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.tarjeta-evento:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* 1. Imagen */
+.evento-img-wrapper {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.evento-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 2. Fecha */
+.evento-fecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  text-align: center;
+  color: #555;
+}
+
+.evento-fecha .dia {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.evento-fecha .mes {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+/* 3. Info Central */
+.evento-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.evento-titulo {
+  color: #02b557; /* Verde Cudeca */
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.evento-desc {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Corta el texto si es muy largo */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.evento-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* 4. Botón */
+.evento-accion {
+  padding-left: 20px;
+}
+
+.btn-comprar {
+  background-color: #02b557;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-comprar:hover {
+  background-color: #029a4a;
+}
