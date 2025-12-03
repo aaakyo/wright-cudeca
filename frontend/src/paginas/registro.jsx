@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom"; // <--- CAMBIO 1: Importamos herramientas de navegación
 import "../cudeca.css";
 
 function Registro() {
   const [paso, setPaso] = useState(1);
+  const navigate = useNavigate(); // <--- CAMBIO 2: Inicializamos el "navegador"
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -35,15 +37,15 @@ function Registro() {
   };
 
   const irAlInicio = () => {
-    console.log("Ir al inicio");
+    navigate("/"); // <--- CAMBIO 3: Ahora nos lleva a la Home de verdad
   };
 
   return (
     <div className="pagina">
-      {/* BARRA DE NAVEGACIÓN */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
-          <a href="#">Inicio</a>
+          {/* CAMBIO EXTRA: Usamos Link en lugar de a href para Inicio */}
+          <Link to="/">Inicio</Link> 
           <a href="#">Mis entradas</a>
           <a href="#">Eventos</a>
           <a href="#">Perfil</a>
@@ -53,10 +55,9 @@ function Registro() {
         </nav>
       </header>
 
-      {/* CONTENIDO CENTRAL */}
+      {/* ... EL RESTO DE TU CÓDIGO SIGUE EXACTAMENTE IGUAL ... */}
       <main className="contenido">
         <div className="tarjeta-registro">
-          {/* IMAGEN */}
           <div className="lado-izquierdo">
             <div className="contenedor-imagen">
               <img
@@ -82,6 +83,7 @@ function Registro() {
                 </p>
 
                 <form className="formulario-registro" onSubmit={handleSubmitPaso1}>
+                   {/* ... Mismo contenido del formulario paso 1 ... */}
                   <div className="fila-formulario">
                     <div className="grupo-campo">
                       <label>Nombre</label>
@@ -151,6 +153,7 @@ function Registro() {
                 </p>
 
                 <form className="formulario-registro" onSubmit={handleSubmitPaso2}>
+                   {/* ... Mismo contenido del formulario paso 2 ... */}
                   <div className="grupo-campo">
                     <label>Contraseña</label>
                     <input
