@@ -35,7 +35,7 @@ function Login() {
           <a href="#">Mis entradas</a>
           <a href="#">Eventos</a>
           <a href="#">Perfil</a>
-          <Link to="/login" className="enlace-verde">
+          <Link to="/LogIn" className="enlace-verde">
             Iniciar sesión
           </Link>
         </nav>

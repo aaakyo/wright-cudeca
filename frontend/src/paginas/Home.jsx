@@ -14,7 +14,7 @@ function Home() {
           <a href="#">Eventos</a>
           <a href="#">Perfil</a>
           {/* El enlace de iniciar sesión tiene color verde */}
-          <Link to="/registro" className="enlace-verde">Iniciar Sesión</Link>
+          <Link to="/LogIn" className="enlace-verde">Iniciar Sesión</Link>
         </nav>
         
         <div className="logo">
