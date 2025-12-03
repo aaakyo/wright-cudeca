@@ -6,31 +6,36 @@ function Home() {
   return (
     <div className="pagina">
       
-      {/* 1. BARRA DE NAVEGACIÓN (Orden cambiado: Links a la izq, Logo a la dcha) */}
+      {/* 1. BARRA DE NAVEGACIÓN */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
-          <a href="#">Mis entradas</a>
-          <a href="#">Eventos</a>
-          <a href="#">Perfil</a>
-          {/* El enlace de iniciar sesión tiene color verde */}
+          {/* Es recomendable usar Link en vez de 'a' para que no recargue la página */}
+          <Link to="/entradas">Mis entradas</Link>
+          <Link to="/eventos">Eventos</Link>
+          
+          {/* --- NUEVO: AÑADIMOS EL ENLACE A PERFIL --- */}
+          <Link to="/perfil">Perfil</Link>
+          
+          {/* --- MANTENIDO: EL ENLACE A LOGIN --- */}
           <Link to="/LogIn" className="enlace-verde">Iniciar Sesión</Link>
+        
         </nav>
         
         <div className="logo">
-           {/* Asegúrate de que cudecaLogo.png está en public/recursos */}
+           {/* Asegúrate de tener la imagen en la carpeta public/recursos */}
            <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
         </div>
       </header>
 
-      {/* 2. HERO SECTION (FOTO GRANDE) */}
+      {/* 2. HERO SECTION */}
       <section className="hero-section">
         <div className="hero-overlay">
           <h1 className="hero-title">¡BIENVENIDO A CUDECA!</h1>
         </div>
       </section>
 
-      {/* 3. SECCIÓN INFO (TEXTO Y BOTÓN) */}
+      {/* 3. SECCIÓN INFO */}
       <section className="info-section">
         {/* Columna Izquierda */}
         <div className="info-columna">
@@ -55,7 +60,6 @@ function Home() {
       {/* 4. FOOTER */}
       <footer className="footer">
         <div className="footer-iconos">
-           {/* Aquí puedes poner iconos reales más adelante */}
            <span>📸 @fundacioncudeca</span>
            <span>📞 952 564 910</span>
            <span>✉️ instituto@cudeca.org</span>
