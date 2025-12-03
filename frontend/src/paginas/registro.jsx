@@ -40,20 +40,20 @@ function Registro() {
 
   return (
     <div className="pagina">
-      {/* BARRA DE NAVEGACIÓN */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
-          <a href="#">Eventos</a>
+          
+          {/* --- CORRECCIÓN AQUÍ TAMBIÉN --- */}
+          <Link to="/eventos">Eventos</Link>
+          
           <a href="#">Perfil</a>
-          {/* En la página de registro, "Iniciar Sesión" es un enlace normal */}
           <Link to="/login" className="enlace-verde">
             Iniciar sesión
           </Link>
         </nav>
         
-        {/* AÑADIDO: El logo a la derecha, igual que en la Home */}
         <div className="logo">
            <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
         </div>

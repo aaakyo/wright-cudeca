@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Registro from "./paginas/registro.jsx";
 import Home from "./paginas/Home.jsx";
 import Login from "./paginas/LogIn.jsx"; 
-import Perfil from "./paginas/Perfil.jsx"; // <--- ESTO FALTABA (Importar Perfil)
+import Perfil from "./paginas/Perfil.jsx"; // <--- 1. IMPORTACIÓN NUEVA
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
         {/* Ruta de login */}
         <Route path="/login" element={<Login />} /> 
 
-        {/* Ruta de Perfil (AÑADIDA) */}
-        <Route path="/perfil" element={<Perfil />} />
+        {/* Ruta de Perfil (NUEVA) */}
+        <Route path="/perfil" element={<Perfil />} /> {/* <--- 2. RUTA NUEVA */}
       </Routes>
     </Router>
   );
