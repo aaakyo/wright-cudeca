@@ -44,16 +44,13 @@ function Registro() {
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
-          
-          {/* --- CORRECCIÓN AQUÍ TAMBIÉN --- */}
           <Link to="/eventos">Eventos</Link>
-          
-          <a href="#">Perfil</a>
+          <Link to="/perfil">Perfil</Link>
           <Link to="/login" className="enlace-verde">
             Iniciar sesión
           </Link>
         </nav>
-        
+
         <div className="logo">
            <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
         </div>

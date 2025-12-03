@@ -53,7 +53,7 @@ function Eventos() {
           <a href="#">Mis entradas</a>
           {/* Marcamos Eventos como activo */}
           <Link to="/eventos" className="enlace-verde" style={{textDecoration: 'underline'}}>Eventos</Link>
-          <a href="#">Perfil</a>
+          <Link to="/perfil">Perfil</Link>
           <Link to="/registro">Cerrar sesión</Link>
         </nav>
         <div className="logo">
