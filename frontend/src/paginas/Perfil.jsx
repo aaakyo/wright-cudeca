@@ -1,24 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../cudeca.css'; 
+import '../cudeca.css';
 
 const Perfil = () => {
   return (
     <div className="pagina">
+      
       {/* 1. BARRA DE NAVEGACIÓN */}
       <nav className="barra-navegacion">
-        <div className="logo">
-           {/* Usa una etiqueta img si tienes el logo, aquí pongo texto por ahora */}
-           <h2 style={{margin:0, color:'#00b050', fontWeight:'800', fontSize:'28px'}}>cudeca</h2>
-        </div>
+        
+        {/* IZQUIERDA: Enlaces de navegación */}
         <div className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <Link to="/entradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
-          {/* La clase enlace-verde pone el texto en verde y negrita */}
           <Link to="/perfil" className="enlace-verde">Perfil</Link>
           <Link to="/logout">Cerrar sesión</Link>
         </div>
+
+        {/* DERECHA: Logo (Ahora con la imagen correcta) */}
+        <div className="logo">
+           <img 
+             src="/recursos/cudecaLogo.png" 
+             alt="Logo Cudeca" 
+             style={{ height: '50px' }} /* Ajusta este número si lo ves muy grande o pequeño */
+           />
+        </div>
+
       </nav>
 
       {/* 2. CABECERA: Título y Botón Editar */}
@@ -30,7 +38,7 @@ const Perfil = () => {
       {/* 3. TARJETA PRINCIPAL BLANCA */}
       <div className="tarjeta-perfil-container">
         
-        {/* COLUMNA IZQUIERDA: FOTO Y DATOS */}
+        {/* COLUMNA IZQUIERDA */}
         <div className="perfil-columna-izq">
           <div className="avatar-grande">
             <span className="avatar-icono">👤</span> 
@@ -44,13 +52,13 @@ const Perfil = () => {
           </div>
         </div>
 
-        {/* COLUMNA DERECHA: LISTA DE EVENTOS */}
+        {/* COLUMNA DERECHA */}
         <div className="perfil-columna-der">
           <h3 className="subtitulo-seccion">Mis eventos</h3>
 
           <div className="lista-eventos-scroll">
             
-            {/* Evento 1: Pendiente */}
+            {/* Evento 1 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">21</span>
@@ -63,7 +71,7 @@ const Perfil = () => {
               <div className="etiqueta etiqueta-pendiente">Pendiente</div>
             </div>
 
-            {/* Evento 2: Cancelado */}
+            {/* Evento 2 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">16</span>
@@ -76,7 +84,7 @@ const Perfil = () => {
               <div className="etiqueta etiqueta-cancelado">Cancelado</div>
             </div>
 
-            {/* Evento 3: Acabado */}
+            {/* Evento 3 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">9</span>
