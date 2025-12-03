@@ -91,9 +91,11 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 60px 10%;
-  background-color: white; /* La Home fuerza el blanco aquí, así que no le afecta el verde de fondo */
+  background-color: white; /* La Home fuerza el blanco aquí */
   align-items: center;
   gap: 50px;
+  /* CAMBIO: Esto hace que la sección blanca crezca hasta tocar el footer, tapando el hueco verde */
+  flex: 1; 
 }
 
 .info-columna {
@@ -131,12 +133,13 @@ body {
 
 /* --- FOOTER (PIE DE PÁGINA) --- */
 .footer {
-  background-color: #aebdc4;
+  /* CAMBIO: Gris más clarito y neutro como en Penpot (antes era #aebdc4) */
+  background-color: #cccccc; 
   padding: 30px 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: #333; /* Texto un poco más oscuro para que se lea bien sobre gris claro */
   font-size: 14px;
   margin-top: auto;
 }
@@ -148,7 +151,7 @@ body {
 }
 
 .footer-links a {
-  color: white;
+  color: #333; /* Ajustamos color de enlaces también */
   margin-left: 20px;
   text-decoration: underline;
 }
