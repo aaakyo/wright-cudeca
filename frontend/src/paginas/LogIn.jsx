@@ -1,73 +1,68 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import "../cudeca.css"; // <--- DESCOMENTA ESTA LÍNEA EN TU VS CODE (y borra la etiqueta <style> de abajo)
+import "../cudecaRegistro.css";
 
 function Login() {
   const navigate = useNavigate();
 
-  // Estado para guardar el email y la contraseña
   const [formData, setFormData] = useState({
     email: "",
-    contraseña: "",
+    password: "",
   });
 
-  const handleChange = (e) => {
+  function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
     console.log("Iniciando sesión con:", formData);
     navigate("/");
-  };
+  }
 
   return (
-    <div className="pagina">
-     
-      {/* --- BARRA DE NAVEGACIÓN --- */}
+    <div className="pagina-registro">
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <a href="#">Mis entradas</a>
-          <a href="#">Eventos</a>
-          <a href="#">Perfil</a>
-          <Link to="/LogIn" className="enlace-verde">
+          <Link to="/eventos">Eventos</Link>
+          <Link to="/perfil">Perfil</Link>
+          <Link to="/LogIn" className="enlace-activo">
             Iniciar sesión
           </Link>
         </nav>
-        {/* AÑADIDO: El logo a la derecha, igual que en la Home */}
         <div className="logo">
-           <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
+          <img
+            src="/recursos/cudecaLogo.png"
+            alt="Fundación Cudeca"
+            height="60"
+          />
         </div>
       </header>
 
       <main className="contenido">
         <div className="tarjeta-registro">
-          {/* --- LADO IZQUIERDO (IMAGEN) --- */}
           <div className="lado-izquierdo">
             <div className="contenedor-imagen">
-              {/* Nota: En la previsualización la imagen puede no cargar si no existe la ruta. 
-                  En tu proyecto local funcionará bien. */}
               <img
                 src="/recursos/cudecaSignupImg.jpg"
                 className="imagen-tarjeta"
-                alt="Personal médico cuidando"
-                onError={(e) => {
-                   e.target.style.display = 'none'; 
-                   e.target.parentNode.style.backgroundColor = '#ccc';
-                   e.target.parentNode.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;">Imagen aquí</div>';
-                }}
+                alt="Personas sonriendo"
               />
             </div>
           </div>
 
-          {/* --- LADO DERECHO (FORMULARIO) --- */}
           <div className="lado-derecho">
+            <div className="puntos">
+              <span className="punto punto-activo"></span>
+              <span className="punto"></span>
+            </div>
+
             <h1 className="titulo-formulario">Iniciar sesión</h1>
             <p className="subtitulo-formulario">
-              ¿No tiene cuenta aún?{" "}
-              <Link to="/registro">Regístrese</Link>
+              ¿No tiene cuenta aún? <Link to="/registro">Regístrese</Link>
             </p>
 
             <form className="formulario-registro" onSubmit={handleSubmit}>
@@ -87,16 +82,24 @@ function Login() {
                 <label>Contraseña</label>
                 <input
                   type="password"
-                  name="contraseña"
+                  name="password"
                   placeholder="Contraseña"
-                  value={formData.contraseña}
+                  value={formData.password}
                   onChange={handleChange}
                   required
                 />
               </div>
 
-              <div style={{ marginTop: '-10px', marginBottom: '10px' }}>
-                <a href="#" style={{ color: '#02b557', fontSize: '14px', fontWeight: '600', textDecoration: 'underline' }}>
+              <div style={{ marginTop: "-10px", marginBottom: "10px" }}>
+                <a
+                  href="#"
+                  style={{
+                    color: "#02b557",
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    textDecoration: "underline",
+                  }}
+                >
                   ¿Ha olvidado su contraseña?
                 </a>
               </div>
