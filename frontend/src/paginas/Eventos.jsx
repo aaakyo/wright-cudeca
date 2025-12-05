@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../cudeca.css';
+import "../estilos/cudeca.css";
 
 // Datos de prueba (luego vendrán de la base de datos)
 const eventosData = [

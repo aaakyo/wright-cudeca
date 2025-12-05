@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom"; 
-import "../cudecaRegistro.css";
+import "../estilos/cudecaRegistro.css";
 
 function Registro() {
   const [paso, setPaso] = useState(1);
