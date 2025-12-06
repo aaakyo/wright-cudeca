@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class AdminService {
     private final AdminRepository adminRepository;
-    private HashMap<Long, Integer> sesiones = new HashMap<>();
+    private HashMap<Integer, Long> sesiones = new HashMap<>();
 
     @Autowired
     public AdminService(AdminRepository adminRepository) {
@@ -38,19 +38,20 @@ public class AdminService {
         return admin != null;
     }
 
-    public Integer iniciarSesion(Long email, String contrasena) {
-        //TODO: ESTO ES EMAIL
-        Admin admin = adminRepository.findById(id).orElse(null);
+    public Integer iniciarSesion(String email, String contrasena) {
+        Admin admin = adminRepository.findByEmail(email);
         if (admin != null) {
             if (admin.getPassword().equals(contrasena)) {
                 Random r = new Random();
                 int sesion = r.nextInt();
-                sesiones.put(admin.getId(), sesion);
+                sesiones.put(sesion, admin.getId());
                 return sesion;
             }
         }
         return -1;
     }
 
-    //TODO: FALTA CERRARSESION
+    public void cerrarSesion(Integer sesion) {
+        sesiones.remove(sesion);
+    }
 }

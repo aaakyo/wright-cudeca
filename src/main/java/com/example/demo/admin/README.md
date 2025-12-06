@@ -22,3 +22,12 @@ GET /api/admins/esAdministrador?id=int
 Mira si la id tal pertenece a un admin
 
 POST /api/admins/iniciarSesion
+inicia sesion con el email y la contraseña
+Cuerpo del post:
+String email;
+String contrasena;
+
+POST /api/admins/cerrarSesion
+cierra la sesion con la id de sesion
+Cuerpo del post:
+Integer sesion;

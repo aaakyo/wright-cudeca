@@ -11,6 +11,7 @@ public class Admin {
     private Long id;
     private String nombre;
     private String apellidos;
+    @Column(unique = true)
     private String email;
     private String password;
 

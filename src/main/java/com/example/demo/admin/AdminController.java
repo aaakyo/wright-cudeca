@@ -46,4 +46,7 @@ public class AdminController {
 
     @PostMapping("/iniciarSesion")
     public Integer iniciarSesion(@RequestBody LoginForm body) {return adminService.iniciarSesion(body.email, body.contrasena); }
+
+    @PostMapping("/cerrarSesion")
+    public void cerrarSesion(@RequestBody Integer sesion) {adminService.cerrarSesion(sesion);}
 }
