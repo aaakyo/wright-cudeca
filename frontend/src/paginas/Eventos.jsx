@@ -109,7 +109,10 @@ function Eventos() {
 
                 {/* 4. BOTÓN */}
                 <div className="evento-accion">
-                  <button className="btn-comprar">Comprar entrada</button>
+                  {/* Envolvemos el botón en un Link que apunta a /comprar/ID_DEL_EVENTO */}
+                  <Link to={`/comprar/${evento.id}`}>
+                   <button className="btn-comprar">Comprar entrada</button>
+                  </Link>
                 </div>
 
               </div>
