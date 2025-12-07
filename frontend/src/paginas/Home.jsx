@@ -11,7 +11,7 @@ function Home() {
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           {/* Es recomendable usar Link en vez de 'a' para que no recargue la página */}
-          <Link to="/entradas">Mis entradas</Link>
+          <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
           
           {/* --- NUEVO: AÑADIMOS EL ENLACE A PERFIL --- */}

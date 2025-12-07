@@ -12,7 +12,7 @@ const Perfil = () => {
         {/* IZQUIERDA: Enlaces de navegación */}
         <div className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
-          <Link to="/entradas">Mis entradas</Link>
+          <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
           <Link to="/perfil" className="enlace-verde">Perfil</Link>
           <Link to="/logout">Cerrar sesión</Link>

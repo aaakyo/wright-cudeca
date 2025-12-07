@@ -26,7 +26,7 @@ function Login() {
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
-          <a href="#">Mis entradas</a>
+          <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
           <Link to="/perfil">Perfil</Link>
           <Link to="/LogIn" className="enlace-activo">
