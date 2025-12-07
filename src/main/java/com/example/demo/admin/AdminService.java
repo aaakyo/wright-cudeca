@@ -1,13 +1,13 @@
 package com.example.demo.admin;
 
-import com.example.demo.admin.Admin;
-import com.example.demo.admin.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class AdminService {
     private final AdminRepository adminRepository;
     private HashMap<Integer, Long> sesiones = new HashMap<>();
