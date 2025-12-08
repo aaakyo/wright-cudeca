@@ -54,7 +54,7 @@ function Eventos() {
           {/* Marcamos Eventos como activo */}
           <Link to="/eventos" className="enlace-verde" style={{textDecoration: 'underline'}}>Eventos</Link>
           <Link to="/perfil">Perfil</Link>
-          <Link to="/registro">Cerrar sesión</Link>
+          <Link to="/registro">Iniciar sesión</Link>
         </nav>
         <div className="logo">
            <img src="/recursos/cudecaLogo.png" alt="Cudeca" height="60" />
