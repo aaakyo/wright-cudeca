@@ -7,7 +7,6 @@ import Eventos from "./paginas/Eventos.jsx";
 import MisEntradas from "./paginas/MisEntradas.jsx";
 import ComprarEntrada from "./paginas/ComprarEntrada.jsx"; 
 import ResultadoCompra from "./paginas/ResultadoCompra.jsx";
-import ComprarEntrada from "./paginas/ComprarEntrada.jsx"; // <--- 1. IMPORTAR
 import PerfilAdmin from "./paginas/PerfilAdmin.jsx";
 
 function App() {
