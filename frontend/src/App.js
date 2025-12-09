@@ -5,6 +5,8 @@ import Login from "./paginas/LogIn.jsx";
 import Perfil from "./paginas/Perfil.jsx";
 import Eventos from "./paginas/Eventos.jsx";
 import MisEntradas from "./paginas/MisEntradas.jsx";
+import ComprarEntrada from "./paginas/ComprarEntrada.jsx"; 
+import ResultadoCompra from "./paginas/ResultadoCompra.jsx";
 import ComprarEntrada from "./paginas/ComprarEntrada.jsx"; // <--- 1. IMPORTAR
 import PerfilAdmin from "./paginas/PerfilAdmin.jsx";
 
@@ -19,6 +21,7 @@ function App() {
         <Route path="/eventos" element={<Eventos />} />
         <Route path="/comprar/:id" element={<ComprarEntrada />} />
         <Route path="/misentradas" element={<MisEntradas />} />
+        <Route path="/resultado" element={<ResultadoCompra />} />
         <Route path="/adminperfil" element={<PerfilAdmin />} />
       </Routes>
     </Router>
