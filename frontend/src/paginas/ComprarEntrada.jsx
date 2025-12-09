@@ -42,9 +42,9 @@ function ComprarEntrada() {
 
     if (quiereExito) {
         // --- CASO 1: ÉXITO ---
-        // Inventamos asientos aleatorios
-        const fila = Math.floor(Math.random() * 10) + 1;
-        const asiento = Math.floor(Math.random() * 20) + 1;
+        // Asiento aleatorio
+        const fila = 5
+        const asiento = 10
         
         // Navegamos a la pantalla de resultado enviando los datos
         navigate('/resultado', {
