@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import "../estilos/cudeca.css"; // Estilos globales (header, etc)
-import "../estilos/ComprarEntrada.css"; // Estilos específicos de esta página
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import "../estilos/cudeca.css"; 
+import "../estilos/ComprarEntrada.css"; 
 
-// Simulación de base de datos (mismos datos que en Eventos.jsx para que coincida)
+// Datos simulados (coinciden con Eventos.jsx)
 const eventosData = [
   { id: 1, titulo: "COCKTAIL BENÉFICO COTTON CLUB", precio: 80, fecha: "12 DIC 2025", img: "/recursos/evento1.jpg" },
   { id: 2, titulo: "GALA BENÉFICA «JAMES BOND» DEL ROTARY CLUB MARBELLA-GUADALMINA", precio: 125, fecha: "2 MAY 2025", img: "/recursos/evento2.jpg" },
@@ -11,25 +11,72 @@ const eventosData = [
 ];
 
 function ComprarEntrada() {
-  const { id } = useParams(); // Obtenemos el ID de la URL
+  const { id } = useParams();
+  const navigate = useNavigate(); // Hook para cambiar de página
   const [evento, setEvento] = useState(null);
 
-  // Formulario
+  // Estado para guardar los datos del formulario
   const [formData, setFormData] = useState({
     nombre: '', apellidos: '', email: '', telefono: '', direccion: '', dni: '', donacion: ''
   });
 
+  // Cargar el evento correcto según la URL
   useEffect(() => {
-    // Buscar el evento correspondiente al ID
     const eventoEncontrado = eventosData.find(e => e.id === parseInt(id));
     setEvento(eventoEncontrado);
   }, [id]);
+
+  // Función para actualizar el estado cuando escribes en los inputs
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // --- FUNCIÓN PRINCIPAL DE COMPRA (MODO DEMO) ---
+  const realizarCompra = (e) => {
+    e.preventDefault();
+
+    // Ventana emergente para que tú elijas qué quieres enseñar
+    const quiereExito = window.confirm(
+        "🛠 MODO DEMO 🛠\n\n¿Qué resultado quieres simular?\n\n✅ ACEPTAR = Compra Exitosa\n❌ CANCELAR = Error en el pago"
+    );
+
+    if (quiereExito) {
+        // --- CASO 1: ÉXITO ---
+        // Inventamos asientos aleatorios
+        const fila = Math.floor(Math.random() * 10) + 1;
+        const asiento = Math.floor(Math.random() * 20) + 1;
+        
+        // Navegamos a la pantalla de resultado enviando los datos
+        navigate('/resultado', {
+            state: {
+                estado: 'exito',
+                datos: {
+                    usuario: formData.nombre || "Usuario",
+                    evento: evento.titulo,
+                    fecha: evento.fecha,
+                    total: evento.precio + (Number(formData.donacion) || 0),
+                    asientos: `Fila ${fila} - Asiento ${asiento}`
+                }
+            }
+        });
+    } else {
+        // --- CASO 2: ERROR ---
+        navigate('/resultado', {
+            state: {
+                estado: 'error',
+                datos: {
+                    error: "Fondos insuficientes (Simulación seleccionada)."
+                }
+            }
+        });
+    }
+  };
 
   if (!evento) return <div className="pagina">Cargando evento...</div>;
 
   return (
     <div className="pagina">
-      {/* HEADER (Reutilizado) */}
+      {/* HEADER */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
@@ -49,7 +96,6 @@ function ComprarEntrada() {
           {/* COLUMNA IZQUIERDA: IMAGEN + DONACIÓN */}
           <div className="col-izquierda">
             <div className="poster-wrapper">
-              {/* Usamos una imagen real o placeholder si falla */}
               <img 
                 src={evento.img} 
                 alt={evento.titulo} 
@@ -63,24 +109,24 @@ function ComprarEntrada() {
                 <label>Importe:</label>
                 <input 
                   type="number" 
+                  name="donacion"
                   className="input-gris" 
                   placeholder="0€"
                   value={formData.donacion}
-                  onChange={(e) => setFormData({...formData, donacion: e.target.value})}
+                  onChange={handleChange}
                 />
               </div>
             </div>
           </div>
 
-          {/* COLUMNA DERECHA: DATOS + FORMULARIO */}
+          {/* COLUMNA DERECHA: INFO + FORMULARIO */}
           <div className="col-derecha">
             
             <div className="header-evento">
-              {/* Caja de fecha estilo calendario */}
               <div className="box-fecha">
                 <div className="box-fecha-top">Evento</div>
-                <div className="box-fecha-num">{evento.fecha.split(" ")[0]}</div> {/* Extrae el día */}
-                <div className="box-fecha-bot">{evento.fecha.split(" ")[1]} 2025</div> {/* Mes y Año */}
+                <div className="box-fecha-num">{evento.fecha.split(" ")[0]}</div>
+                <div className="box-fecha-bot">{evento.fecha.split(" ")[1]} 2025</div>
               </div>
 
               <div className="info-titulo-precio">
@@ -92,27 +138,27 @@ function ComprarEntrada() {
             <form className="formulario-compra">
               <div className="campo">
                 <label>Nombre:</label>
-                <input type="text" className="input-gris" />
+                <input type="text" name="nombre" className="input-gris" onChange={handleChange} />
               </div>
               <div className="campo">
                 <label>Apellidos:</label>
-                <input type="text" className="input-gris" />
+                <input type="text" name="apellidos" className="input-gris" onChange={handleChange} />
               </div>
               <div className="campo">
                 <label>Email:</label>
-                <input type="email" className="input-gris" />
+                <input type="email" name="email" className="input-gris" onChange={handleChange} />
               </div>
               <div className="campo">
                 <label>Teléfono:</label>
-                <input type="tel" className="input-gris" />
+                <input type="tel" name="telefono" className="input-gris" onChange={handleChange} />
               </div>
               <div className="campo">
                 <label>Dirección:</label>
-                <input type="text" className="input-gris" />
+                <input type="text" name="direccion" className="input-gris" onChange={handleChange} />
               </div>
               <div className="campo">
                 <label>Dni:</label>
-                <input type="text" className="input-gris" />
+                <input type="text" name="dni" className="input-gris" onChange={handleChange} />
               </div>
             </form>
 
@@ -137,7 +183,8 @@ function ComprarEntrada() {
             </div>
 
             <div className="btn-container">
-              <button className="btn-comprar-final">Comprar</button>
+              {/* Botón único que lanza la pregunta de confirmación */}
+              <button className="btn-comprar-final" onClick={realizarCompra}>Comprar</button>
             </div>
 
           </div>
