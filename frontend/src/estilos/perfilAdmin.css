@@ -1,0 +1,281 @@
+/* =======================
+   PERFIL ADMIN
+   ======================= */
+
+.pagina-admin {
+  min-height: 100vh;
+  background-color: #d5f0d8;
+  font-family: "Inter Tight", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* NAV dentro de la página admin, mismos márgenes que pagina-registro */
+.pagina-admin .barra-navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 4px;
+  margin-left: 72px;
+}
+
+/* CONTENIDO PRINCIPAL */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
+}
+
+/* Cabecera: título + botón, alineada con la tarjeta como en registro */
+.admin-header {
+  width: 90vw;
+  max-width: 1700px;
+  margin: 16px auto 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Botón verde superior */
+.btn-admin-vista {
+  background-color: #02b557;
+  color: #ffffff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-admin-vista:hover {
+  background-color: #029a4a;
+}
+
+/* TARJETA GRANDE gris, mismos márgenes/ancho que .tarjeta-registro */
+.admin-panel {
+  margin: 8px auto 40px;
+  background-color: #f5f5f5;
+  border-radius: 24px;
+  display: flex;
+  align-items: stretch;
+  width: 90vw;
+  max-width: 1700px;
+  min-height: 520px;
+  padding: 40px 40px 32px;
+  gap: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Tarjeta izquierda (perfil) */
+.admin-left {
+  flex: 0 0 360px;
+  background-color: #ffffff;
+  border-radius: 22px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.admin-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.admin-avatar-icon {
+  font-size: 70px;
+  color: #555;
+}
+
+.admin-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #333333;
+}
+
+.admin-email {
+  font-size: 14px;
+  color: #555555;
+  text-align: center;
+}
+
+/* Tarjeta derecha (lista eventos) */
+.admin-right {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 22px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.admin-right-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+/* Lista de eventos con scroll discreto */
+.admin-event-list {
+  flex: 1;
+  height: 340px;
+  overflow-y: scroll;
+  padding-right: 6px;
+}
+
+.admin-event-list::-webkit-scrollbar {
+  width: 6px;
+}
+.admin-event-list::-webkit-scrollbar-thumb {
+  background-color: #dddddd;
+  border-radius: 4px;
+}
+.admin-event-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Filas de evento */
+.admin-event-row {
+  display: flex;
+  align-items: center;
+  align-content: vertical;
+  padding: 18px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.admin-event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 24px;
+  min-width: 40px;
+  font-size: 12px;
+  color: #999999;
+}
+
+.admin-event-day {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  color: #444444;
+}
+
+.admin-event-month {
+  font-size: 13px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.admin-event-info {
+  flex: 1;
+}
+
+.admin-event-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 4px;
+}
+
+.admin-event-time {
+  font-size: 14px;
+  color: #777777;
+}
+
+.admin-event-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Badges */
+.badge-estado {
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 70px;
+  text-align: center;
+  border: none;
+}
+
+.badge-publico {
+  background-color: #aefeb6;
+  color: #007a3e;
+}
+
+.badge-privado {
+  background-color: #ffcdd2;
+  color: #c62828;
+}
+
+/* Botón "Gestionar" */
+.btn-gestionar {
+  padding: 6px 18px;
+  font-family: "Inter Tight", sans-serif;
+  border-radius: 999px;
+  border: none;
+  background-color: #02b557;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-gestionar:hover {
+  background-color: #029a4a;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .admin-panel {
+    flex-direction: column;
+    padding: 24px 24px 28px;
+    height: auto;
+  }
+
+  .admin-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .admin-header,
+  .admin-panel {
+    width: 96vw;
+  }
+
+  .pagina-admin .barra-navegacion {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-left: 16px;
+    padding-top: 16px;
+  }
+}

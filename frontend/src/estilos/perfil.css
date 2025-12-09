@@ -1,0 +1,191 @@
+/* =========================================
+   ESTILOS DE LA PÁGINA DE PERFIL (DE ARTURO)
+   ========================================= */
+
+.cabecera-perfil-top {
+  width: 90vw;
+  max-width: 1400px;              /* igual que admin / registro */
+  margin: 16px auto 8px auto;     /* alineado con la tarjeta */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-pagina {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+
+/* botón igual estilo que el de admin */
+.btn-editar-top {
+  background-color: white;
+  font-family: Inter Tight, sans-serif;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #02b557;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-editar-top:hover {
+  background-color: #f0fdf4;
+  border-color: #02b557;
+}
+
+/* botón de ir a vista admin si lo usas aquí también */
+.btn-admin-vista {
+  background-color: #02b557;
+  font-family: Inter Tight, sans-serif;
+  border: none;                   /* sin borde gris */
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-decoration: none;
+}
+
+.btn-admin-vista:hover {
+  background-color: #029a4a;
+}
+
+/* tarjeta de perfil con mismo ancho/márgenes que admin-panel / tarjeta-registro */
+.tarjeta-perfil-container {
+  background-color: #f5f5f5;      /* gris suave como admin */
+  border-radius: 24px;
+  display: flex;
+  width: 90vw;
+  max-width: 1400px;              /* mismo tope que admin/login */
+  min-height: 500px;
+  padding: 40px;
+  margin: 8px auto 40px auto;     /* misma separación que las demás tarjetas */
+  gap: 60px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* dentro, el contenido sigue igual que antes */
+.perfil-columna-izq {
+  flex: 0 0 320px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+.avatar-grande {
+  width: 140px;
+  height: 140px;
+  background-color: #d1d1d1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.avatar-icono {
+  font-size: 70px;
+  color: #999;
+}
+
+.nombre-perfil {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.inputs-perfil-lista {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-gris {
+  width: 100%;
+  font-family: "Inter Tight", sans-serif;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
+.input-gris:focus {
+  outline: 2px solid #02b557;
+}
+
+/* columna derecha con datos / lo que tengas allí */
+.perfil-columna-der {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+}
+
+.subtitulo-seccion {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.lista-eventos-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.lista-eventos-scroll::-webkit-scrollbar { width: 6px; }
+.lista-eventos-scroll::-webkit-scrollbar-thumb { background-color: #ddd; border-radius: 4px; }
+
+.evento-fila {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.evento-fecha-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 25px;
+  min-width: 40px;
+}
+
+.dia-grande { font-size: 24px; font-weight: 800; line-height: 1; color: #444; }
+.mes-peque { font-size: 12px; text-transform: uppercase; color: #888; margin-top: 2px;}
+
+.evento-detalles { flex: 1; }
+.evento-nombre { font-weight: 700; font-size: 16px; color: #222; margin-bottom: 4px; }
+.evento-horario { font-size: 14px; color: #777; }
+
+@media (max-width: 900px) {
+  .tarjeta-perfil-container {
+    flex-direction: column;
+    height: auto;
+    gap: 24px;
+    padding: 20px;
+  }
+
+  .perfil-columna-izq,
+  .perfil-columna-der {
+    width: 100%;
+  }
+}

@@ -1,64 +1,76 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import "../estilos/cudeca.css";
+// frontend/src/paginas/Perfil.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import "../estilos/perfil.css";
 
 const Perfil = () => {
   return (
     <div className="pagina">
-      
-      {/* 1. BARRA DE NAVEGACIÓN */}
       <nav className="barra-navegacion">
-        
-        {/* IZQUIERDA: Enlaces de navegación */}
         <div className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
-          <Link to="/perfil" className="enlace-verde">Perfil</Link>
+          <Link to="/perfil" className="enlace-verde">
+            Perfil
+          </Link>
           <Link to="/logout">Cerrar sesión</Link>
         </div>
 
-        {/* DERECHA: Logo (Ahora con la imagen correcta) */}
         <div className="logo">
-           <img 
-             src="/recursos/cudecaLogo.png" 
-             alt="Logo Cudeca" 
-             style={{ height: '50px' }} /* Ajusta este número si lo ves muy grande o pequeño */
-           />
+          <img
+            src="/recursos/cudecaLogo.png"
+            alt="Logo Cudeca"
+            style={{ height: "50px" }}
+          />
         </div>
-
       </nav>
 
-      {/* 2. CABECERA: Título y Botón Editar */}
       <div className="cabecera-perfil-top">
         <h1 className="titulo-pagina">Mi perfil</h1>
-        <button className="btn-editar-top">Editar perfil</button>
+
+        <div className="cabecera-perfil-acciones">
+          <button className="btn-editar-top">Editar perfil</button>
+
+          <Link to="/adminperfil">
+            <button className="btn-admin-vista">Ver opciones de admin</button>
+          </Link>
+        </div>
       </div>
 
-      {/* 3. TARJETA PRINCIPAL BLANCA */}
       <div className="tarjeta-perfil-container">
-        
-        {/* COLUMNA IZQUIERDA */}
         <div className="perfil-columna-izq">
           <div className="avatar-grande">
-            <span className="avatar-icono">👤</span> 
+            <span className="avatar-icono">👤</span>
           </div>
           <div className="nombre-perfil">Nombre Apellido</div>
 
           <div className="inputs-perfil-lista">
-            <input type="text" className="input-gris" value="nombreapellido@gmail.com" readOnly />
-            <input type="text" className="input-gris" value="Avd. Nombre, 01, 3x" readOnly />
-            <input type="text" className="input-gris" value="722 01 01 01" readOnly />
+            <input
+              type="text"
+              className="input-gris"
+              value="nombreapellido@gmail.com"
+              readOnly
+            />
+            <input
+              type="text"
+              className="input-gris"
+              value="Avd. Nombre, 01, 3x"
+              readOnly
+            />
+            <input
+              type="text"
+              className="input-gris"
+              value="722 01 01 01"
+              readOnly
+            />
           </div>
         </div>
 
-        {/* COLUMNA DERECHA */}
         <div className="perfil-columna-der">
           <h3 className="subtitulo-seccion">Mis eventos</h3>
 
           <div className="lista-eventos-scroll">
-            
-            {/* Evento 1 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">21</span>
@@ -71,7 +83,6 @@ const Perfil = () => {
               <div className="etiqueta etiqueta-pendiente">Pendiente</div>
             </div>
 
-            {/* Evento 2 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">16</span>
@@ -84,7 +95,6 @@ const Perfil = () => {
               <div className="etiqueta etiqueta-cancelado">Cancelado</div>
             </div>
 
-            {/* Evento 3 */}
             <div className="evento-fila">
               <div className="evento-fecha-box">
                 <span className="dia-grande">9</span>
@@ -96,14 +106,12 @@ const Perfil = () => {
               </div>
               <div className="etiqueta etiqueta-acabado">Acabado</div>
             </div>
-
           </div>
 
           <div className="link-descubre">
             Descubre más <a href="/eventos">eventos</a>
           </div>
         </div>
-
       </div>
     </div>
   );

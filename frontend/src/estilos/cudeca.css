@@ -252,6 +252,23 @@ body {
   border-color: #02b557;
 }
 
+.btn-admin-vista {
+  background-color: #02b557;
+  font-family: Inter Tight, sans-serif;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.btn-admin-vista:hover {
+  border-color: #02b557;
+}
+
 .tarjeta-perfil-container {
   background-color: white;
   border-radius: 24px;
