@@ -38,7 +38,6 @@ function ResultadoCompra() {
             <h1 className="titulo-resultado" style={{color: '#02b557'}}>¡Compra Exitosa!</h1>
             <p className="mensaje-resultado">
               Gracias <strong>{datos.usuario}</strong>, hemos procesado tu pedido correctamente.
-              Has recibido un email con la confirmación.
             </p>
 
             <div className="detalles-compra">
@@ -55,11 +54,17 @@ function ResultadoCompra() {
                 <strong>{datos.total}€</strong>
               </div>
 
-              {/* Caja de Asientos Simulados */}
-              <div className="asientos-box">
-                <span className="asientos-titulo">Tus Asientos Asignados</span>
-                <span className="asientos-nums">{datos.asientos}</span>
+              {/* CAMBIO: Hemos quitado la caja de asientos y puesto el texto informativo */}
+              <div style={{ marginTop: '30px', borderTop: '1px solid #eee', paddingTop: '20px', textAlign: 'center' }}>
+                <p style={{ fontSize: '16px', color: '#333', marginBottom: '10px' }}>
+                  Puedes consultar tus entradas en el apartado <Link to="/entradas" style={{ color: '#02b557', fontWeight: 'bold', textDecoration: 'underline' }}>Mis entradas</Link> o en tu correo electrónico.
+                </p>
+                
+                <p style={{ fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
+                  * Si has realizado la compra sin cuenta registrada, revisa tu bandeja de entrada (o spam) para descargar las entradas.
+                </p>
               </div>
+
             </div>
 
             <Link to="/" className="btn-volver">Volver al Inicio</Link>
