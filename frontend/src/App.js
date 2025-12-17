@@ -8,6 +8,7 @@ import MisEntradas from "./paginas/MisEntradas.jsx";
 import ComprarEntrada from "./paginas/ComprarEntrada.jsx"; 
 import ResultadoCompra from "./paginas/ResultadoCompra.jsx";
 import PerfilAdmin from "./paginas/PerfilAdmin.jsx";
+import AdminPanel from "./paginas/AdminPanel.jsx"; 
 
 function App() {
   return (
@@ -21,7 +22,11 @@ function App() {
         <Route path="/comprar/:id" element={<ComprarEntrada />} />
         <Route path="/misentradas" element={<MisEntradas />} />
         <Route path="/resultado" element={<ResultadoCompra />} />
-        <Route path="/adminperfil" element={<PerfilAdmin />} />
+        
+        {/* RUTAS DE ADMINISTRADOR */}
+        <Route path="/adminperfil" element={<PerfilAdmin />} /> {/* El Dashboard */}
+        <Route path="/admin" element={<AdminPanel />} />       {/* El Formulario de Crear */}
+
       </Routes>
     </Router>
   );

@@ -1,12 +1,22 @@
 package com.example.demo.event;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@RequestMapping("/api/eventos") // Corregido a español
+@RequestMapping("/api/eventos")
+@CrossOrigin(origins = "http://localhost:3000") // ¡IMPORTANTE! Añadido para que React pueda hablar con él
 public class EventController {
 
     private final SistemaEventos sistemaEventos;
@@ -17,8 +27,7 @@ public class EventController {
     }
 
     /**
-     * Obtiene los últimos eventos. Acepta un parámetro 'cantidad' para limitar los resultados.
-     * Ejemplo: GET /api/eventos?cantidad=5
+     * Obtiene los últimos eventos.
      */
     @GetMapping
     public List<Event> getUltimosEventos(@RequestParam(defaultValue = "10") int cantidad) {
@@ -26,8 +35,7 @@ public class EventController {
     }
 
     /**
-     * Obtiene un evento específico por su ID.
-     * Ejemplo: GET /api/eventos/1
+     * Obtiene un evento por ID.
      */
     @GetMapping("/{id}")
     public Event getEventoPorId(@PathVariable Long id) {
@@ -35,8 +43,7 @@ public class EventController {
     }
 
     /**
-     * Crea un nuevo evento. El ID del usuario (administrador) se pasa como parámetro.
-     * Ejemplo: POST /api/eventos?usuarioId=1
+     * Crea un nuevo evento. Requiere usuarioId.
      */
     @PostMapping
     public Event crearEvento(@RequestBody Event evento, @RequestParam int usuarioId) {
@@ -44,8 +51,7 @@ public class EventController {
     }
 
     /**
-     * Modifica un evento existente. El ID del usuario (administrador) se pasa como parámetro.
-     * Ejemplo: PUT /api/eventos?usuarioId=1
+     * Modifica evento.
      */
     @PutMapping
     public void modificarEvento(@RequestBody Event evento, @RequestParam int usuarioId) {
@@ -53,18 +59,15 @@ public class EventController {
     }
 
     /**
-     * Borra un evento por su ID. El ID del usuario (administrador) se pasa como parámetro.
-     * Ejemplo: DELETE /api/eventos/1?usuarioId=1
+     * Borra evento.
      */
     @DeleteMapping("/{id}")
     public void borrarEvento(@PathVariable Long id, @RequestParam int usuarioId) {
         sistemaEventos.borrarEvento(id, usuarioId);
     }
 
-
     /**
-     * Marca un evento como publicado. El ID del usuario (administrador) se pasa como parámetro.
-     * Ejemplo: PUT /api/eventos/1/publicar?usuarioId=1
+     * Publicar evento.
      */
     @PutMapping("/{id}/publicar")
     public void publicarEvento(@PathVariable Long id, @RequestParam int usuarioId) {
@@ -72,8 +75,7 @@ public class EventController {
     }
 
     /**
-     * Marca un evento como cancelado. El ID del usuario (administrador) se pasa como parámetro.
-     * Ejemplo: PUT /api/eventos/1/cancelar?usuarioId=1
+     * Cancelar evento.
      */
     @PutMapping("/{id}/cancelar")
     public void cancelarEvento(@PathVariable Long id, @RequestParam int usuarioId) {

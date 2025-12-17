@@ -4,16 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Entrada {
+// HEMOS QUITADO LA ETIQUETA @INHERITANCE PORQUE YA NO TIENE HIJOS
+public class Entrada {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    // --- DATOS DEL COMPRADOR ---
+    private Long usuarioId; // Null si es invitado
+    private String nombre;
+    private String apellidos;
+    private String email;
+    private String telefono;
+    // ---------------------------
+
+    private Long eventoId;
     private int donacionExtra;
     private boolean pagada;
     private boolean cancelada;
@@ -21,51 +29,46 @@ public abstract class Entrada {
     public Entrada() {
     }
 
-    public Entrada(int donacionExtra, boolean pagada, boolean cancelada) {
+    public Entrada(Long usuarioId, Long eventoId, String nombre, String apellidos, String email, String telefono, int donacionExtra, boolean pagada) {
+        this.usuarioId = usuarioId;
+        this.eventoId = eventoId;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.telefono = telefono;
         this.donacionExtra = donacionExtra;
         this.pagada = pagada;
-        this.cancelada = cancelada;
+        this.cancelada = false;
     }
 
-    public int getId() {
-        return id;
-    }
+    // Getters y Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Long getUsuarioId() { return usuarioId; }
+    public void setUsuarioId(Long usuarioId) { this.usuarioId = usuarioId; }
 
-    public int getDonacionExtra() {
-        return donacionExtra;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public void setDonacionExtra(int donacionExtra) {
-        this.donacionExtra = donacionExtra;
-    }
+    public String getApellidos() { return apellidos; }
+    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
 
-    public boolean isPagada() {
-        return pagada;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public void setPagada(boolean pagada) {
-        this.pagada = pagada;
-    }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 
-    public boolean isCancelada() {
-        return cancelada;
-    }
+    public Long getEventoId() { return eventoId; }
+    public void setEventoId(Long eventoId) { this.eventoId = eventoId; }
 
-    public void setCancelada(boolean cancelada) {
-        this.cancelada = cancelada;
-    }
+    public int getDonacionExtra() { return donacionExtra; }
+    public void setDonacionExtra(int donacionExtra) { this.donacionExtra = donacionExtra; }
 
-    @Override
-    public String toString() {
-        return "Entrada{" +
-                "id=" + id +
-                ", donacionExtra=" + donacionExtra +
-                ", pagada=" + pagada +
-                ", cancelada=" + cancelada +
-                '}';
-    }
+    public boolean isPagada() { return pagada; }
+    public void setPagada(boolean pagada) { this.pagada = pagada; }
+
+    public boolean isCancelada() { return cancelada; }
+    public void setCancelada(boolean cancelada) { this.cancelada = cancelada; }
 }

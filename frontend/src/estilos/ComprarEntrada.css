@@ -1,225 +1,136 @@
-/* src/estilos/ComprarEntrada.css */
-
+/* Contenedor principal centrado */
 .compra-main {
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-  width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    width: 100%;
 }
 
-.compra-card {
-  background-color: #f9f9f9;
-  width: 100%;
-  max-width: 1100px;
-  border-radius: 24px;
-  padding: 40px;
-  display: flex;
-  gap: 40px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+.compra-card-moderna {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    display: flex;
+    max-width: 1100px;
+    width: 100%;
+    overflow: hidden;
+    padding: 40px;
+    gap: 50px;
 }
 
-/* --- COLUMNA IZQUIERDA (Poster + Donación) --- */
-.col-izquierda {
-  flex: 0 0 320px; /* Ancho fijo para el poster */
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* Columna Izquierda (Poster) */
+.col-poster {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.poster-wrapper {
-  width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+.poster-imagen {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-.poster-wrapper img {
-  width: 100%;
-  height: auto;
-  display: block;
+/* Columna Derecha (Formulario) */
+.col-formulario {
+    flex: 1.5;
 }
 
-.donacion-extra {
-  margin-top: 10px;
+.titulo-compra {
+    font-size: 2rem;
+    color: #02b557; /* Verde Cudeca */
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
-.donacion-label {
-  color: #02b557;
-  font-weight: 600;
-  margin-bottom: 8px;
-  display: block;
-  font-size: 15px;
+.precio-compra {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.donacion-input-group {
-  display: flex;
-  flex-direction: column;
+.aviso-usuario {
+    background-color: #e8f8f5;
+    color: #007a3e;
+    padding: 12px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.donacion-input-group label {
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 5px;
-  color: #333;
+/* --- ESTILOS DE LOS INPUTS (TIPO BURBUJA GRIS) --- */
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* --- COLUMNA DERECHA (Formulario) --- */
-.col-derecha {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+.fila-doble {
+    display: flex;
+    gap: 20px;
 }
 
-.header-evento {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
+.campo-burbuja {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Cajita verde de fecha */
-.box-fecha {
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  width: 80px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
+.campo-burbuja label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 8px;
+    margin-left: 5px;
 }
 
-.box-fecha-top {
-  background-color: #c9eecd; /* Verde muy clarito */
-  color: #fff;
-  padding: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  background-color: #a6dcb1; /* Ajuste visual */
+/* AQUÍ ESTÁ EL DISEÑO QUE PEDISTE */
+.campo-burbuja input {
+    background-color: #f0f2f5; /* Fondo gris suave */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 12px; /* Bordes muy redondeados */
+    padding: 14px 18px;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.2s ease;
+    font-family: inherit;
 }
 
-.box-fecha-num {
-  font-size: 28px;
-  font-weight: 800;
-  color: #02b557;
-  padding: 5px 0;
-  background-color: white;
+/* Efecto al hacer clic (Focus) */
+.campo-burbuja input:focus {
+    background-color: #ffffff; /* Se vuelve blanco */
+    border-color: #02b557; /* Borde verde brillante */
+    outline: none;
+    box-shadow: 0 4px 15px rgba(2, 181, 87, 0.1);
 }
 
-.box-fecha-bot {
-  background-color: #009a44;
-  color: white;
-  font-size: 12px;
-  padding: 4px;
-  text-transform: uppercase;
+.btn-confirmar-compra {
+    margin-top: 20px;
+    background-color: #02b557;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
 }
 
-.info-titulo-precio h2 {
-  color: #02b557;
-  font-size: 22px;
-  margin: 0 0 10px 0;
-  line-height: 1.3;
+.btn-confirmar-compra:hover {
+    background-color: #029a4a;
+    transform: translateY(-2px);
 }
 
-.precio-texto {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* Formulario Grid */
-.formulario-compra {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  row-gap: 15px;
-  margin-bottom: 25px;
-}
-
-.campo {
-  display: flex;
-  flex-direction: column;
-}
-
-.campo label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 6px;
-}
-
-/* Estilo input gris redondeado (como en la foto) */
-.input-gris {
-  background-color: #e6e6e6;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 14px;
-  outline: none;
-}
-
-.input-gris:focus {
-  border-color: #02b557;
-  background-color: #fff;
-}
-
-/* Checkboxes */
-.checkboxes-legales {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: #333;
-}
-
-/* Resumen Footer */
-.resumen-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 30px;
-}
-
-.resumen-item {
-  margin-bottom: 8px;
-}
-
-.resumen-item strong {
-  font-weight: 600;
-  margin-right: 5px;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.btn-comprar-final {
-  background-color: #02b557;
-  color: white;
-  border: none;
-  padding: 12px 60px;
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.btn-comprar-final:hover {
-  background-color: #029447;
-}
-
-@media (max-width: 768px) {
-  .compra-card { flex-direction: column; }
-  .formulario-compra { grid-template-columns: 1fr; }
-  .resumen-footer { grid-template-columns: 1fr; }
+/* Móvil */
+@media (max-width: 800px) {
+    .compra-card-moderna { flex-direction: column; padding: 20px; }
+    .fila-doble { flex-direction: column; gap: 20px; }
+    .col-poster { display: none; } /* Ocultamos poster en móvil para ahorrar espacio */
 }

@@ -5,21 +5,24 @@ import "../estilos/ResultadoCompra.css";
 
 function ResultadoCompra() {
   const location = useLocation();
-  // Recibimos los datos enviados desde la navegación
+  // Recibimos los datos de la "mochila" (state) que envió ComprarEntrada
   const { estado, datos } = location.state || {}; 
 
-  // Si alguien intenta entrar directo por URL sin comprar, mostramos error genérico
+  // Protección: Si alguien entra poniendo la URL a mano sin comprar
   if (!estado) {
     return (
       <div className="pagina">
-        <div className="resultado-main">
+        <header className="barra-navegacion">
+            <div className="logo"><img src="/recursos/cudecaLogo.png" alt="logo" height="60"/></div>
+        </header>
+        <main className="resultado-main">
           <div className="tarjeta-resultado">
             <div className="icono-resultado">❓</div>
             <h1 className="titulo-resultado">Acceso no válido</h1>
-            <p className="mensaje-resultado">No hemos encontrado información de compra reciente.</p>
-            <Link to="/" className="btn-volver">Volver al inicio</Link>
+            <p className="mensaje-resultado">No hemos encontrado información de una compra reciente.</p>
+            <Link to="/eventos" className="btn-volver">Ir a Eventos</Link>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
@@ -29,13 +32,19 @@ function ResultadoCompra() {
     return (
       <div className="pagina">
         <header className="barra-navegacion">
+            <nav className="enlaces-navegacion">
+                <Link to="/">Inicio</Link>
+                <Link to="/misentradas">Mis entradas</Link>
+                <Link to="/eventos">Eventos</Link>
+                <Link to="/perfil">Perfil</Link>
+            </nav>
             <div className="logo"><img src="/recursos/cudecaLogo.png" alt="logo" height="60"/></div>
         </header>
 
         <main className="resultado-main">
-          <div className="tarjeta-resultado">
+          <div className="tarjeta-resultado exito">
             <div className="icono-resultado">✅</div>
-            <h1 className="titulo-resultado" style={{color: '#02b557'}}>¡Compra Exitosa!</h1>
+            <h1 className="titulo-resultado">¡Compra Exitosa!</h1>
             <p className="mensaje-resultado">
               Gracias <strong>{datos.usuario}</strong>, hemos procesado tu pedido correctamente.
             </p>
@@ -49,25 +58,29 @@ function ResultadoCompra() {
                 <span>Fecha:</span>
                 <strong>{datos.fecha}</strong>
               </div>
-              <div className="detalle-fila">
+              {datos.asientos && (
+                  <div className="detalle-fila">
+                    <span>Asientos:</span>
+                    <strong>{datos.asientos}</strong>
+                  </div>
+              )}
+              <div className="detalle-fila total">
                 <span>Total pagado:</span>
                 <strong>{datos.total}€</strong>
               </div>
 
-              {/* CAMBIO: Hemos quitado la caja de asientos y puesto el texto informativo */}
-              <div style={{ marginTop: '30px', borderTop: '1px solid #eee', paddingTop: '20px', textAlign: 'center' }}>
-                <p style={{ fontSize: '16px', color: '#333', marginBottom: '10px' }}>
-                  Puedes consultar tus entradas en el apartado <Link to="/entradas" style={{ color: '#02b557', fontWeight: 'bold', textDecoration: 'underline' }}>Mis entradas</Link> o en tu correo electrónico.
+              <div className="info-extra">
+                <p>
+                  Puedes consultar tus entradas en el apartado <Link to="/misentradas">Mis entradas</Link> o en tu correo electrónico.
                 </p>
-                
-                <p style={{ fontSize: '14px', color: '#666', fontStyle: 'italic' }}>
-                  * Si has realizado la compra sin cuenta registrada, revisa tu bandeja de entrada (o spam) para descargar las entradas.
-                </p>
+                <small>
+                  * Si has realizado la compra sin cuenta registrada, revisa tu bandeja de entrada (o spam).
+                </small>
               </div>
 
             </div>
 
-            <Link to="/" className="btn-volver">Volver al Inicio</Link>
+            <Link to="/eventos" className="btn-volver">Volver a Eventos</Link>
           </div>
         </main>
       </div>
@@ -81,15 +94,15 @@ function ResultadoCompra() {
             <div className="logo"><img src="/recursos/cudecaLogo.png" alt="logo" height="60"/></div>
         </header>
         <main className="resultado-main">
-          <div className="tarjeta-resultado">
+          <div className="tarjeta-resultado error">
             <div className="icono-resultado">❌</div>
-            <h1 className="titulo-resultado texto-error">¡Ups! Algo salió mal</h1>
+            <h1 className="titulo-resultado">¡Ups! Algo salió mal</h1>
             <p className="mensaje-resultado">
-              No hemos podido procesar tu pago. Por favor, revisa tus datos o inténtalo más tarde.
+              No hemos podido procesar tu pago. Por favor, inténtalo más tarde.
             </p>
-            {datos.error && <p style={{color:'red', fontSize:'14px'}}>Error: {datos.error}</p>}
+            {datos.error && <p className="error-tecnico">Detalle: {datos.error}</p>}
             
-            <Link to={`/eventos`} className="btn-volver btn-error">Intentar de nuevo</Link>
+            <Link to="/eventos" className="btn-volver btn-error">Intentar de nuevo</Link>
           </div>
         </main>
     </div>

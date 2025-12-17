@@ -1,192 +1,179 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import "../estilos/cudeca.css"; 
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import "../estilos/cudeca.css";
+// Asegúrate de que importamos el CSS específico que vamos a crear ahora
 import "../estilos/ComprarEntrada.css"; 
-
-// Datos simulados (coinciden con Eventos.jsx)
-const eventosData = [
-  { id: 1, titulo: "COCKTAIL BENÉFICO COTTON CLUB", precio: 80, fecha: "12 DIC 2025", img: "/recursos/evento1.jpg" },
-  { id: 2, titulo: "GALA BENÉFICA «JAMES BOND» DEL ROTARY CLUB MARBELLA-GUADALMINA", precio: 125, fecha: "2 MAY 2025", img: "/recursos/evento2.jpg" },
-  { id: 3, titulo: "CAMINATA SOLIDARIA POR LA VIDA", precio: 10, fecha: "05 ENE 2026", img: "/recursos/evento3.jpg" }
-];
 
 function ComprarEntrada() {
   const { id } = useParams();
-  const navigate = useNavigate(); // Hook para cambiar de página
+  const navigate = useNavigate();
   const [evento, setEvento] = useState(null);
+  const [usuarioLogueado, setUsuarioLogueado] = useState(null);
 
-  // Estado para guardar los datos del formulario
   const [formData, setFormData] = useState({
     nombre: '', apellidos: '', email: '', telefono: '', direccion: '', dni: '', donacion: ''
   });
 
-  // Cargar el evento correcto según la URL
   useEffect(() => {
-    const eventoEncontrado = eventosData.find(e => e.id === parseInt(id));
-    setEvento(eventoEncontrado);
+    // 1. Cargar Evento
+    fetch(`http://localhost:8080/api/eventos/${id}`)
+      .then(res => {
+         if(!res.ok) throw new Error("Error al cargar evento");
+         return res.json();
+      })
+      .then(data => setEvento(data))
+      .catch(err => console.error(err));
+
+    // 2. Cargar Usuario
+    const userString = localStorage.getItem('usuarioLogueado');
+    if (userString) {
+        const user = JSON.parse(userString);
+        setUsuarioLogueado(user);
+        setFormData(prev => ({
+            ...prev,
+            nombre: user.nombre || '',
+            apellidos: user.apellidos || '',
+            email: user.email || '',
+            telefono: user.telefono || '',
+            dni: user.dni || '',
+            direccion: user.direccionPostal || ''
+        }));
+    }
   }, [id]);
 
-  // Función para actualizar el estado cuando escribes en los inputs
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // --- FUNCIÓN PRINCIPAL DE COMPRA (MODO DEMO) ---
-  const realizarCompra = (e) => {
+  const realizarCompra = async (e) => {
     e.preventDefault();
+    const userString = localStorage.getItem('usuarioLogueado');
+    const usuarioAlInstante = userString ? JSON.parse(userString) : null;
+    
+    if (!formData.nombre || !formData.email) {
+        alert("Por favor, rellena los campos obligatorios.");
+        return;
+    }
 
-    // Ventana emergente para que tú elijas qué quieres enseñar
-    const quiereExito = window.confirm(
-        "🛠 MODO DEMO 🛠\n\n¿Qué resultado quieres simular?\n\n✅ ACEPTAR = Compra Exitosa\n❌ CANCELAR = Error en el pago"
-    );
+    const nuevaEntrada = {
+        usuarioId: usuarioAlInstante ? usuarioAlInstante.id : null,
+        eventoId: parseInt(id),
+        nombre: formData.nombre,
+        apellidos: formData.apellidos,
+        email: formData.email,
+        telefono: formData.telefono,
+        donacionExtra: parseInt(formData.donacion) || 0,
+        pagada: true,
+        cancelada: false
+    };
 
-    if (quiereExito) {
-        // --- CASO 1: ÉXITO ---
-        // Asiento aleatorio
-        const fila = 5
-        const asiento = 10
-        
-        // Navegamos a la pantalla de resultado enviando los datos
-        navigate('/resultado', {
-            state: {
-                estado: 'exito',
-                datos: {
-                    usuario: formData.nombre || "Usuario",
-                    evento: evento.titulo,
-                    fecha: evento.fecha,
-                    total: evento.precio + (Number(formData.donacion) || 0),
-                    asientos: `Fila ${fila} - Asiento ${asiento}`
-                }
-            }
+    try {
+        const response = await fetch('http://localhost:8080/api/entradas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nuevaEntrada)
         });
-    } else {
-        // --- CASO 2: ERROR ---
-        navigate('/resultado', {
-            state: {
-                estado: 'error',
-                datos: {
-                    error: "Fondos insuficientes (Simulación seleccionada)."
+
+        if (response.ok) {
+            navigate('/resultado', {
+                state: {
+                    estado: 'exito',
+                    datos: {
+                        usuario: formData.nombre,
+                        evento: evento.nombre,
+                        fecha: evento.fechaInicio,
+                        total: (evento.precio || 0) + (Number(formData.donacion) || 0)
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            alert("Error al procesar la compra.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error de conexión.");
     }
   };
 
-  if (!evento) return <div className="pagina">Cargando evento...</div>;
+  if (!evento) return <div className="pagina">Cargando...</div>;
 
   return (
     <div className="pagina">
-      {/* HEADER */}
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
           <Link to="/misentradas">Mis entradas</Link>
-          <Link to="/eventos" className="enlace-verde" style={{ textDecoration: 'underline' }}>Eventos</Link>
+          <Link to="/eventos">Eventos</Link>
           <Link to="/perfil">Perfil</Link>
-          <Link to="/registro">Iniciar sesión</Link>
         </nav>
-        <div className="logo">
-           <img src="/recursos/cudecaLogo.png" alt="Cudeca" height="60" />
-        </div>
+        <div className="logo"><img src="/recursos/cudecaLogo.png" alt="Cudeca" height="60" /></div>
       </header>
 
       <main className="compra-main">
-        <div className="compra-card">
+        <div className="compra-card-moderna">
           
-          {/* COLUMNA IZQUIERDA: IMAGEN + DONACIÓN */}
-          <div className="col-izquierda">
-            <div className="poster-wrapper">
-              <img 
-                src={evento.img} 
-                alt={evento.titulo} 
-                onError={(e) => e.target.src = 'https://via.placeholder.com/300x450'}
-              />
-            </div>
-            
-            <div className="donacion-extra">
-              <span className="donacion-label">¿Quieres aportar una donación extra?</span>
-              <div className="donacion-input-group">
-                <label>Importe:</label>
-                <input 
-                  type="number" 
-                  name="donacion"
-                  className="input-gris" 
-                  placeholder="0€"
-                  value={formData.donacion}
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+          {/* COLUMNA IZQUIERDA: POSTER */}
+          <div className="col-poster">
+             <img 
+               src={evento.imagen ? `/recursos/${evento.imagen}` : "https://via.placeholder.com/300x450"} 
+               alt={evento.nombre}
+               className="poster-imagen"
+             />
           </div>
 
-          {/* COLUMNA DERECHA: INFO + FORMULARIO */}
-          <div className="col-derecha">
+          {/* COLUMNA DERECHA: FORMULARIO */}
+          <div className="col-formulario">
+            <h2 className="titulo-compra">{evento.nombre}</h2>
+            <p className="precio-compra">{evento.precio ? `${evento.precio}€` : 'Gratuito'}</p>
             
-            <div className="header-evento">
-              <div className="box-fecha">
-                <div className="box-fecha-top">Evento</div>
-                <div className="box-fecha-num">{evento.fecha.split(" ")[0]}</div>
-                <div className="box-fecha-bot">{evento.fecha.split(" ")[1]} 2025</div>
-              </div>
-
-              <div className="info-titulo-precio">
-                <h2>{evento.titulo}</h2>
-                <div className="precio-texto">Precio: {evento.precio}€</div>
-              </div>
+            <div className="aviso-usuario">
+                {usuarioLogueado 
+                    ? `👤 Comprando como: ${usuarioLogueado.nombre}`
+                    : `ℹ️ Comprando como INVITADO`
+                }
             </div>
 
-            <form className="formulario-compra">
-              <div className="campo">
-                <label>Nombre:</label>
-                <input type="text" name="nombre" className="input-gris" onChange={handleChange} />
+            <form className="form-grid">
+              {/* FILA 1: Nombre y Apellidos */}
+              <div className="fila-doble">
+                  <div className="campo-burbuja">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} />
+                  </div>
+                  <div className="campo-burbuja">
+                    <label>Apellidos:</label>
+                    <input type="text" name="apellidos" value={formData.apellidos} onChange={handleChange} />
+                  </div>
               </div>
-              <div className="campo">
-                <label>Apellidos:</label>
-                <input type="text" name="apellidos" className="input-gris" onChange={handleChange} />
+
+              {/* FILA 2: Email y Teléfono */}
+              <div className="fila-doble">
+                  <div className="campo-burbuja">
+                    <label>Email:</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} />
+                  </div>
+                  <div className="campo-burbuja">
+                    <label>Teléfono:</label>
+                    <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} />
+                  </div>
               </div>
-              <div className="campo">
-                <label>Email:</label>
-                <input type="email" name="email" className="input-gris" onChange={handleChange} />
-              </div>
-              <div className="campo">
-                <label>Teléfono:</label>
-                <input type="tel" name="telefono" className="input-gris" onChange={handleChange} />
-              </div>
-              <div className="campo">
+
+              {/* FILA 3: Dirección */}
+              <div className="campo-burbuja">
                 <label>Dirección:</label>
-                <input type="text" name="direccion" className="input-gris" onChange={handleChange} />
+                <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} />
               </div>
-              <div className="campo">
-                <label>Dni:</label>
-                <input type="text" name="dni" className="input-gris" onChange={handleChange} />
+
+              {/* FILA 4: Donación */}
+              <div className="campo-burbuja">
+                 <label>¿Donación extra? (Opcional)</label>
+                 <input type="number" name="donacion" placeholder="0€" value={formData.donacion} onChange={handleChange} />
               </div>
+
+              <button className="btn-confirmar-compra" onClick={realizarCompra}>
+                CONFIRMAR COMPRA
+              </button>
             </form>
-
-            <div className="checkboxes-legales">
-              <label className="checkbox-row">
-                <input type="checkbox" /> Acepto que CUDECA use mis datos para enviarme publicidad
-              </label>
-              <label className="checkbox-row">
-                <input type="checkbox" /> Acepto que CUDECA use estos datos para generar un certificado de donación
-              </label>
-            </div>
-
-            <div className="resumen-footer">
-              <div className="col-resumen">
-                <div className="resumen-item"><strong>Fecha:</strong> {evento.fecha}</div>
-                <div className="resumen-item"><strong>Tipo entrada:</strong> Normal</div>
-              </div>
-              <div className="col-resumen">
-                <div className="resumen-item"><strong>Nº entrada:</strong> XXXXXXXXX</div>
-                <div className="resumen-item"><strong>Importe:</strong> {evento.precio + (Number(formData.donacion) || 0)}€</div>
-              </div>
-            </div>
-
-            <div className="btn-container">
-              {/* Botón único que lanza la pregunta de confirmación */}
-              <button className="btn-comprar-final" onClick={realizarCompra}>Comprar</button>
-            </div>
-
           </div>
         </div>
       </main>

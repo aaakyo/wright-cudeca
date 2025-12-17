@@ -1,156 +1,119 @@
-/* ===== CONTENEDOR PRINCIPAL ===== */
-.mis-entradas-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 60px 10px 60px;
+/* Contenedor principal centrado */
+.contenedor-lista-eventos {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
 }
 
-/* ===== TÍTULO ===== */
-.titulo-pagina {
-  font-size: 36px;
-  font-weight: 700;
-  color: #000;
+.cabecera-lista h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 800;
 }
 
-/* ===== SEARCH BOX ===== */
-.mis-entradas-search-container {
-  position: relative;
+/* Lista de tarjetas */
+.lista-tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.mis-entradas-search {
-  width: 250px;
-  padding: 10px 35px 10px 15px;
-  border-radius: 25px;
-  border: 1px solid #ccc;
-  outline: none;
-  font-size: 14px;
-  background: white;
+/* TARJETA INDIVIDUAL (El Ticket) */
+.ticket-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Sombra suave */
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 6px solid #02b557; /* Borde verde a la izquierda */
+    position: relative;
+    overflow: hidden;
 }
 
-.mis-entradas-search-icon {
-  position: absolute;
-  right: 12px;
-  top: 9px;
-  font-size: 18px;
-  opacity: 0.6;
+.ticket-card:hover {
+    transform: translateY(-3px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-/* ===== GRID ===== */
-.mis-entradas-grid {
-  display: flex;
-  gap: 45px;
-  padding-left: 60px;
-  flex-wrap: wrap;
+/* Icono (Cajita verde) */
+.ticket-icon-box {
+    background-color: #e8f8f5;
+    min-width: 70px;
+    height: 70px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-right: 25px;
+    color: #02b557;
 }
 
-/* ===== TARJETA ===== */
-.entrada-card {
-  width: 330px;
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+/* Información del texto */
+.ticket-details {
+    flex: 1; /* Ocupa todo el espacio disponible */
 }
 
-.entrada-img-wrapper {
-  width: 100%;
-  height: 230px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.ticket-evento-titulo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
 }
 
-.entrada-img {
-  width: 70%;
-  height: auto;
-  border-radius: 8px;
+.ticket-meta {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
 }
 
-.entrada-img-placeholder {
-  width: 70%;
-  height: 200px;
-  background: #e6e6e6;
-  border-radius: 8px;
+.ticket-meta strong {
+    color: #333;
+    font-weight: 600;
 }
 
-.qr-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.15);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
+/* Etiqueta de Estado (PAGADO) */
+.ticket-status-badge {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-.qr-modal {
-  background: #bcbec0;
-  padding: 30px;
-  border-radius: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.status-pagado {
+    background-color: #d5f0d8;
+    color: #02b557;
+    border: 1px solid #bcebc2;
 }
 
-.qr-img {
-  width: 260px;
-  height: 260px;
+.status-pendiente {
+    background-color: #fadbd8;
+    color: #e74c3c;
+    border: 1px solid #f5b7b1;
 }
 
-
-/* TEXTOS */
-.entrada-titulo {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #0D8E31;
-  font-weight: bold;
+/* Responsive para móvil */
+@media (max-width: 600px) {
+    .ticket-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+    .ticket-icon-box {
+        margin-bottom: 15px;
+    }
+    .ticket-status-badge {
+        margin-top: 15px;
+        align-self: flex-start;
+    }
 }
-
-.entrada-fecha {
-  margin-top: 15px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.entrada-hora {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-/* ESTADO */
-.entrada-estado {
-  width: fit-content;
-  padding: 6px 15px;
-  border-radius: 20px;
-  font-size: 13px;
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-
-.estado-pendiente {
-  background: #C8F3C2;
-  color: #0C7E1C;
-}
-
-.estado-acabado {
-  background: #CDE9FF;
-  color: #1D74C8;
-}
-
-/* VER QR */
-.entrada-verqr {
-  color: #0DA30F;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: auto;
-  text-decoration: none;
-}
-

@@ -15,10 +15,37 @@ function Login() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  // --- CONEXIÓN CON BACKEND ---
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Iniciando sesión con:", formData);
-    navigate("/");
+    
+    try {
+        const response = await fetch('http://localhost:8080/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+            // 1. Convertimos la respuesta de Java a un objeto JS
+            const usuario = await response.json();
+            
+            // 2. ¡IMPORTANTE! Guardamos al usuario en la "mochila" del navegador
+            // Esto nos servirá para saber quién está logueado en las otras páginas
+            localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
+
+            alert("¡Bienvenido de nuevo, " + usuario.nombre + "!");
+            navigate("/"); // Vamos al inicio
+        } else {
+            alert("Email o contraseña incorrectos. Inténtalo de nuevo.");
+        }
+
+    } catch (error) {
+        console.error("Error al conectar:", error);
+        alert("Error de conexión con el servidor.");
+    }
   }
 
   return (
@@ -29,7 +56,7 @@ function Login() {
           <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
           <Link to="/perfil">Perfil</Link>
-          <Link to="/LogIn" className="enlace-activo">
+          <Link to="/login" className="enlace-activo">
             Iniciar sesión
           </Link>
         </nav>

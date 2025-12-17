@@ -1,120 +1,173 @@
-// frontend/src/paginas/Perfil.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import "../estilos/cudeca.css";
 import "../estilos/perfil.css";
 
-const Perfil = () => {
+function Perfil() {
+  const navigate = useNavigate();
+  const [usuario, setUsuario] = useState(null);
+  const [entradas, setEntradas] = useState([]);
+  const [editando, setEditando] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    const userString = localStorage.getItem('usuarioLogueado');
+    if (!userString) {
+        navigate("/login");
+        return;
+    }
+    const user = JSON.parse(userString);
+    setUsuario(user);
+    setFormData(user); 
+
+    fetch(`http://localhost:8080/api/entradas/usuario/${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+            // Ordenamos para que salgan primero las más recientes
+            setEntradas(data.reverse());
+        })
+        .catch(err => console.error(err));
+
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleGuardar = async () => {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${usuario.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            const userActualizado = await response.json();
+            const nuevoUser = { ...usuario, ...userActualizado };
+            localStorage.setItem('usuarioLogueado', JSON.stringify(nuevoUser));
+            setUsuario(nuevoUser);
+            setEditando(false);
+            alert("Perfil actualizado correctamente");
+        } else {
+            alert("Error al actualizar");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error de conexión");
+    }
+  };
+
+  const cerrarSesion = () => {
+      localStorage.removeItem('usuarioLogueado');
+      navigate('/');
+      window.location.reload();
+  };
+
+  // Función para sacar día y mes de la fecha REAL de la BBDD
+  const formatearFecha = (fechaString) => {
+      if (!fechaString) return { dia: "??", mes: "..." };
+      
+      const fecha = new Date(fechaString);
+      const dia = fecha.getDate();
+      const mes = fecha.toLocaleString('es-ES', { month: 'short' }).toUpperCase().replace('.', '');
+      
+      return { dia, mes };
+  };
+
+  if (!usuario) return null;
+
   return (
     <div className="pagina">
-      <nav className="barra-navegacion">
-        <div className="enlaces-navegacion">
-          <Link to="/">Inicio</Link>
-          <Link to="/misentradas">Mis entradas</Link>
-          <Link to="/eventos">Eventos</Link>
-          <Link to="/perfil" className="enlace-verde">
-            Perfil
-          </Link>
-          <Link to="/logout">Cerrar sesión</Link>
+      <header className="barra-navegacion">
+        <nav className="enlaces-navegacion">
+            <Link to="/">Inicio</Link>
+            <Link to="/misentradas">Mis entradas</Link>
+            <Link to="/eventos">Eventos</Link>
+            <Link to="/perfil" className="enlace-verde" style={{textDecoration:'underline'}}>Perfil</Link>
+            <span onClick={cerrarSesion} style={{cursor:'pointer', marginLeft:'20px', color:'#666'}}>Cerrar sesión</span>
+        </nav>
+        <div className="logo"><img src="/recursos/cudecaLogo.png" alt="logo" height="60" /></div>
+      </header>
+
+      <div className="perfil-container">
+        
+        <div className="perfil-header">
+            <h1 className="perfil-titulo">Mi perfil</h1>
+            <div className="perfil-acciones">
+                <button className="btn-editar" onClick={() => setEditando(!editando)}>
+                    {editando ? "Cancelar edición" : "Editar perfil"}
+                </button>
+                
+                {/* --- AQUÍ ESTÁ EL CAMBIO CLAVE --- */}
+                {/* Enlazamos el botón al Dashboard de Admin */}
+                <Link to="/adminperfil">
+                    <button className="btn-admin">Ver opciones de admin</button>
+                </Link>
+                {/* ---------------------------------- */}
+            </div>
         </div>
 
-        <div className="logo">
-          <img
-            src="/recursos/cudecaLogo.png"
-            alt="Logo Cudeca"
-            style={{ height: "50px" }}
-          />
-        </div>
-      </nav>
+        <div className="perfil-card-grande">
+            
+            <div className="columna-datos">
+                <div className="avatar-circulo">👤</div>
+                <h2 className="nombre-completo">{usuario.nombre} {usuario.apellidos}</h2>
 
-      <div className="cabecera-perfil-top">
-        <h1 className="titulo-pagina">Mi perfil</h1>
-
-        <div className="cabecera-perfil-acciones">
-          <button className="btn-editar-top">Editar perfil</button>
-
-          <Link to="/adminperfil">
-            <button className="btn-admin-vista">Ver opciones de admin</button>
-          </Link>
-        </div>
-      </div>
-
-      <div className="tarjeta-perfil-container">
-        <div className="perfil-columna-izq">
-          <div className="avatar-grande">
-            <span className="avatar-icono">👤</span>
-          </div>
-          <div className="nombre-perfil">Nombre Apellido</div>
-
-          <div className="inputs-perfil-lista">
-            <input
-              type="text"
-              className="input-gris"
-              value="nombreapellido@gmail.com"
-              readOnly
-            />
-            <input
-              type="text"
-              className="input-gris"
-              value="Avd. Nombre, 01, 3x"
-              readOnly
-            />
-            <input
-              type="text"
-              className="input-gris"
-              value="722 01 01 01"
-              readOnly
-            />
-          </div>
-        </div>
-
-        <div className="perfil-columna-der">
-          <h3 className="subtitulo-seccion">Mis eventos</h3>
-
-          <div className="lista-eventos-scroll">
-            <div className="evento-fila">
-              <div className="evento-fecha-box">
-                <span className="dia-grande">21</span>
-                <span className="mes-peque">DIC</span>
-              </div>
-              <div className="evento-detalles">
-                <div className="evento-nombre">Cena Benéfica Navideña</div>
-                <div className="evento-horario">19:00-22:00</div>
-              </div>
-              <div className="etiqueta etiqueta-pendiente">Pendiente</div>
+                {editando ? (
+                    <>
+                        <input type="text" name="email" value={formData.email} disabled className="dato-input-editable" style={{opacity:0.6}}/>
+                        <input type="text" name="direccionPostal" value={formData.direccionPostal || ''} placeholder="Dirección" onChange={handleChange} className="dato-input-editable"/>
+                        <input type="text" name="telefono" value={formData.telefono || ''} placeholder="Teléfono" onChange={handleChange} className="dato-input-editable"/>
+                        <button className="btn-guardar" onClick={handleGuardar}>GUARDAR CAMBIOS</button>
+                    </>
+                ) : (
+                    <>
+                        <div className="dato-box">{usuario.email}</div>
+                        <div className="dato-box">{usuario.direccionPostal || "Sin dirección añadida"}</div>
+                        <div className="dato-box">{usuario.telefono || "Sin teléfono"}</div>
+                    </>
+                )}
             </div>
 
-            <div className="evento-fila">
-              <div className="evento-fecha-box">
-                <span className="dia-grande">16</span>
-                <span className="mes-peque">NOV</span>
-              </div>
-              <div className="evento-detalles">
-                <div className="evento-nombre">Concierto Benéfico</div>
-                <div className="evento-horario">16:00-21:00</div>
-              </div>
-              <div className="etiqueta etiqueta-cancelado">Cancelado</div>
-            </div>
+            <div className="columna-eventos">
+                <h3 className="titulo-seccion">Mis eventos</h3>
+                
+                <div className="lista-eventos-perfil">
+                    {entradas.length === 0 ? (
+                        <p style={{color:'#999'}}>No tienes eventos próximos.</p>
+                    ) : (
+                        entradas.map((entrada, index) => {
+                            const { dia, mes } = formatearFecha(entrada.fecha);
 
-            <div className="evento-fila">
-              <div className="evento-fecha-box">
-                <span className="dia-grande">9</span>
-                <span className="mes-peque">OCT</span>
-              </div>
-              <div className="evento-detalles">
-                <div className="evento-nombre">Charla UMA</div>
-                <div className="evento-horario">17:00-18:00</div>
-              </div>
-              <div className="etiqueta etiqueta-acabado">Acabado</div>
-            </div>
-          </div>
+                            return (
+                                <div key={index} className="fila-evento">
+                                    <div className="fecha-evento">
+                                        <span className="dia">{dia}</span>
+                                        <span className="mes">{mes}</span>
+                                    </div>
+                                    <div className="info-evento">
+                                        <div className="titulo-evento">
+                                            {entrada.nombreEvento || "Evento sin nombre"}
+                                        </div>
+                                        <div className="hora-evento">{entrada.hora || "Hora por confirmar"}</div>
+                                    </div>
+                                    
+                                    <span className={`badge ${entrada.pagada ? 'pendiente' : 'cancelado'}`}>
+                                        {entrada.pagada ? 'Activo' : 'Pendiente'}
+                                    </span>
+                                </div>
+                            );
+                        })
+                    )}
+                </div>
 
-          <div className="link-descubre">
-            Descubre más <a href="/eventos">eventos</a>
-          </div>
+                <Link to="/eventos" className="link-descubre">Descubre más eventos</Link>
+            </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default Perfil;

@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../estilos/cudeca.css";
 
 function Home() {
+  const [usuario, setUsuario] = useState(null);
+
+  // 1. Al cargar la página, miramos si hay alguien en la "mochila"
+  useEffect(() => {
+    const usuarioGuardado = localStorage.getItem('usuarioLogueado');
+    if (usuarioGuardado) {
+      setUsuario(JSON.parse(usuarioGuardado));
+    }
+  }, []);
+
+  // 2. Función para cerrar sesión
+  const cerrarSesion = () => {
+    localStorage.removeItem('usuarioLogueado'); // Borramos la mochila
+    setUsuario(null); // Actualizamos la pantalla
+    window.location.reload(); // Recargamos para limpiar todo rastro
+  };
+
   return (
     <div className="pagina">
       
@@ -10,20 +27,28 @@ function Home() {
       <header className="barra-navegacion">
         <nav className="enlaces-navegacion">
           <Link to="/">Inicio</Link>
-          {/* Es recomendable usar Link en vez de 'a' para que no recargue la página */}
           <Link to="/misentradas">Mis entradas</Link>
           <Link to="/eventos">Eventos</Link>
-          
-          {/* --- NUEVO: AÑADIMOS EL ENLACE A PERFIL --- */}
           <Link to="/perfil">Perfil</Link>
           
-          {/* --- MANTENIDO: EL ENLACE A LOGIN --- */}
-          <Link to="/LogIn" className="enlace-verde">Iniciar sesión</Link>
+          {/* --- AQUÍ ESTÁ EL CAMBIO MÁGICO --- */}
+          {usuario ? (
+            /* Si hay usuario, mostramos CERRAR SESIÓN */
+            <span 
+                onClick={cerrarSesion} 
+                className="enlace-verde" 
+                style={{cursor: 'pointer'}}
+            >
+                Cerrar sesión
+            </span>
+          ) : (
+            /* Si NO hay usuario, mostramos INICIAR SESIÓN */
+            <Link to="/login" className="enlace-verde">Iniciar sesión</Link>
+          )}
         
         </nav>
         
         <div className="logo">
-           {/* Asegúrate de tener la imagen en la carpeta public/recursos */}
            <img src="/recursos/cudecaLogo.png" alt="Fundación Cudeca" height="60" />
         </div>
       </header>
@@ -31,7 +56,10 @@ function Home() {
       {/* 2. HERO SECTION */}
       <section className="hero-section">
         <div className="hero-overlay">
-          <h1 className="hero-title">¡BIENVENIDO A CUDECA!</h1>
+            {/* Pequeño detalle: Si está logueado, le saludamos */}
+            <h1 className="hero-title">
+                {usuario ? `¡HOLA, ${usuario.nombre.toUpperCase()}!` : "¡BIENVENIDO A CUDECA!"}
+            </h1>
         </div>
       </section>
 
@@ -51,9 +79,17 @@ function Home() {
         {/* Columna Derecha */}
         <div className="info-columna" style={{textAlign: 'center'}}>
           <h2 className="info-titulo">Forma parte de nuestra comunidad</h2>
-          <Link to="/registro" className="btn-registro-home">
-            ¡Regístrate!
-          </Link>
+          
+          {/* Si ya está registrado, le invitamos a ver eventos en lugar de registrarse otra vez */}
+          {usuario ? (
+              <Link to="/eventos" className="btn-registro-home">
+                Ver Eventos
+              </Link>
+          ) : (
+              <Link to="/registro" className="btn-registro-home">
+                ¡Regístrate!
+              </Link>
+          )}
         </div>
       </section>
 

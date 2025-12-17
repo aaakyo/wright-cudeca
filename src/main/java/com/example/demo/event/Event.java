@@ -1,13 +1,21 @@
 package com.example.demo.event;
 
-import com.example.demo.asiento.Asiento;
-import com.example.demo.entrada.Entrada;
-import com.example.demo.entrada.TipoEntrada;
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.demo.asiento.Asiento;
+import com.example.demo.entrada.Entrada;
+import com.example.demo.entrada.TipoEntrada;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "event")
@@ -23,10 +31,19 @@ public class Event {
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private String descripcion;
+    private String imagen; 
+
+    // --- 1. AÑADIDO AQUÍ ---
+    private Double precio;
+    // -----------------------
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Entrada> listaEntradas;
     private boolean oculto;
     private int metaRecaudacion;
     private TipoEntrada tipoEntrada;
+    
+    @OneToMany(cascade = CascadeType.ALL) 
     private List<Asiento> asientos;
 
     public Event() {}
@@ -39,6 +56,7 @@ public class Event {
                  LocalTime horaFin,
                  String descripcion,
                  int metaRecaudacion,
+                 Double precio, // --- 2. AÑADIDO AL CONSTRUCTOR ---
                  TipoEntrada tipoEntrada,
                  List<Asiento> asientos) {
 
@@ -52,9 +70,19 @@ public class Event {
         this.asientos = asientos;
         this.tipoEntrada = tipoEntrada;
         this.metaRecaudacion = metaRecaudacion;
+        this.precio = precio; // --- Y ASIGNADO AQUÍ ---
         oculto = true;
         listaEntradas = new ArrayList<>();
+    }
 
+    // --- 3. GETTERS Y SETTERS ---
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
 
     public int getMetaRecaudacion() {
@@ -103,6 +131,14 @@ public class Event {
 
     public TipoEntrada getTipoEntrada() {
         return tipoEntrada;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public void setAsientos(List<Asiento> asientos) {
@@ -157,4 +193,3 @@ public class Event {
         this.tipoEntrada = tipoEntrada;
     }
 }
-

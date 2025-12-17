@@ -25,14 +25,53 @@ function Registro() {
     setPaso(2);
   };
 
-  const handleSubmitPaso2 = (e) => {
+  // --- AQUÍ ESTÁ LA MAGIA DE LA CONEXIÓN ---
+  const handleSubmitPaso2 = async (e) => {
     e.preventDefault();
+    
+    // 1. Validación local
     if (!formData.contraseña || formData.contraseña !== formData.contraseñaConfirmada) {
       alert("Las contraseñas no coinciden");
       return;
     }
-    setPaso(3);
+
+    // 2. Preparamos el objeto para Java
+    // Java espera "password", pero tú tienes "contraseña". Hacemos el cambio aquí.
+    const usuarioParaBackend = {
+        nombre: formData.nombre,
+        apellidos: formData.apellidos,
+        email: formData.email,
+        telefono: formData.telefono,
+        password: formData.contraseña, // Cambio clave
+        // Los campos que no tienes en este formulario (DNI, Dirección...) 
+        // se enviarán como null automáticamente o puedes omitirlos.
+        socio: false 
+    };
+
+    try {
+        // 3. Enviamos los datos
+        const response = await fetch('http://localhost:8080/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(usuarioParaBackend),
+        });
+
+        if (response.ok) {
+            // 4. ÉXITO: Java lo ha guardado. Pasamos a la pantalla final.
+            setPaso(3);
+        } else {
+            // ERROR: Probablemente el email ya existe
+            const errorText = await response.text();
+            alert("Error: " + errorText);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("No se pudo conectar con el servidor.");
+    }
   };
+  // -----------------------------------------
 
   const irAlInicio = () => {
     navigate("/");
@@ -87,17 +126,17 @@ function Registro() {
                   <div className="fila-formulario">
                     <div className="grupo-campo">
                       <label>Nombre</label>
-                      <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} />
+                      <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required />
                     </div>
                     <div className="grupo-campo">
                       <label>Apellidos</label>
-                      <input type="text" name="apellidos" placeholder="Apellidos" value={formData.apellidos} onChange={handleChange} />
+                      <input type="text" name="apellidos" placeholder="Apellidos" value={formData.apellidos} onChange={handleChange} required />
                     </div>
                   </div>
 
                   <div className="grupo-campo">
                     <label>Correo electrónico</label>
-                    <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} />
+                    <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} required />
                   </div>
 
                   <div className="grupo-campo">
@@ -106,7 +145,7 @@ function Registro() {
                   </div>
 
                   <div className="checkbox-formulario">
-                    <input type="checkbox" id="terminos" />
+                    <input type="checkbox" id="terminos" required />
                     <label htmlFor="terminos">
                       He leído y acepto la <a href="#">política de términos y condiciones de CUDECA</a>
                     </label>
@@ -124,11 +163,11 @@ function Registro() {
                 <form className="formulario-registro" onSubmit={handleSubmitPaso2}>
                   <div className="grupo-campo">
                     <label>Contraseña</label>
-                    <input type="password" name="contraseña" placeholder="Contraseña" value={formData.contraseña} onChange={handleChange} />
+                    <input type="password" name="contraseña" placeholder="Contraseña" value={formData.contraseña} onChange={handleChange} required />
                   </div>
                   <div className="grupo-campo">
                     <label>Repetir contraseña</label>
-                    <input type="password" name="contraseñaConfirmada" placeholder="Contraseña" value={formData.contraseñaConfirmada} onChange={handleChange} />
+                    <input type="password" name="contraseñaConfirmada" placeholder="Contraseña" value={formData.contraseñaConfirmada} onChange={handleChange} required />
                   </div>
                   <div className="fila-botones">
                     <button type="button" className="boton-siguiente boton-atras" onClick={() => setPaso(1)}>Atrás</button>

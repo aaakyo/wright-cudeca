@@ -1,115 +1,122 @@
-/* src/estilos/ResultadoCompra.css */
-
+/* Centrar todo el contenido en pantalla */
 .resultado-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 80vh;
-  padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f4f4f4;
+    padding: 20px;
 }
 
+/* La tarjeta blanca */
 .tarjeta-resultado {
-  background-color: white;
-  border-radius: 24px;
-  padding: 50px;
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: aparecer 0.5s ease-out;
 }
 
-/* Iconos animados */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .icono-resultado {
-  font-size: 80px;
-  margin-bottom: 10px;
+    font-size: 60px;
+    margin-bottom: 20px;
 }
 
 .titulo-resultado {
-  font-size: 32px;
-  margin: 0;
-  color: #333;
+    margin-bottom: 10px;
+    color: #333;
 }
+
+.exito .titulo-resultado { color: #02b557; }
+.error .titulo-resultado { color: #e74c3c; }
 
 .mensaje-resultado {
-  font-size: 16px;
-  color: #666;
-  line-height: 1.5;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
-/* Caja de detalles de la entrada (Solo para éxito) */
+/* Detalles del ticket */
 .detalles-compra {
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 16px;
-  padding: 25px;
-  width: 100%;
-  margin-top: 10px;
-  text-align: left;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    text-align: left;
 }
 
 .detalle-fila {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 15px;
-  color: #444;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 10px;
 }
 
-.detalle-fila strong {
-  color: #000;
+.detalle-fila:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
-.asientos-box {
-  background-color: white;
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 15px;
-  text-align: center;
-  border: 2px dashed #02b557;
+.detalle-fila span { color: #888; }
+.detalle-fila strong { color: #333; font-weight: 600; }
+
+.detalle-fila.total {
+    margin-top: 15px;
+    border-top: 2px solid #ddd;
+    border-bottom: none;
+    padding-top: 15px;
+    font-size: 1.2em;
 }
 
-.asientos-titulo {
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #888;
-  margin-bottom: 5px;
-  display: block;
+.info-extra {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
 }
 
-.asientos-nums {
-  font-size: 24px;
-  font-weight: 800;
-  color: #02b557;
+.info-extra a {
+    color: #02b557;
+    font-weight: bold;
+}
+
+.info-extra small {
+    display: block;
+    margin-top: 10px;
+    color: #999;
+    font-style: italic;
 }
 
 /* Botones */
 .btn-volver {
-  background-color: #02b557;
-  color: white;
-  text-decoration: none;
-  padding: 15px 40px;
-  border-radius: 12px;
-  font-weight: 600;
-  margin-top: 20px;
-  display: inline-block;
-  transition: background 0.2s;
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background 0.3s;
 }
 
 .btn-volver:hover {
-  background-color: #029447;
+    background-color: #555;
 }
 
 .btn-error {
-  background-color: #d32f2f;
+    background-color: #e74c3c;
 }
 
 .btn-error:hover {
-  background-color: #b71c1c;
+    background-color: #c0392b;
 }
-
-/* Estilos específicos para error */
-.texto-error { color: #d32f2f; }
