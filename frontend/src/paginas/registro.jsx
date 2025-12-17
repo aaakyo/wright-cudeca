@@ -25,7 +25,7 @@ function Registro() {
     setPaso(2);
   };
 
-  // --- AQUÍ ESTÁ LA MAGIA DE LA CONEXIÓN ---
+  
   const handleSubmitPaso2 = async (e) => {
     e.preventDefault();
     
@@ -35,16 +35,13 @@ function Registro() {
       return;
     }
 
-    // 2. Preparamos el objeto para Java
-    // Java espera "password", pero tú tienes "contraseña". Hacemos el cambio aquí.
     const usuarioParaBackend = {
         nombre: formData.nombre,
         apellidos: formData.apellidos,
         email: formData.email,
         telefono: formData.telefono,
-        password: formData.contraseña, // Cambio clave
-        // Los campos que no tienes en este formulario (DNI, Dirección...) 
-        // se enviarán como null automáticamente o puedes omitirlos.
+        password: formData.contraseña, 
+        
         socio: false 
     };
 

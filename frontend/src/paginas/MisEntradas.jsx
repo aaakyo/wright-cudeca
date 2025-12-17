@@ -76,7 +76,7 @@ function MisEntradas() {
                             
                             <div className="ticket-details">
                                 <h3 className="ticket-evento-titulo">
-                                    {/* AQUI ESTÁ EL CAMBIO: Leemos directo de la BBDD */}
+                                    {/* Leemos directo de la BBDD */}
                                     {entrada.nombreEvento || "Evento sin nombre"}
                                 </h3>
                                 <div className="ticket-meta">

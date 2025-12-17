@@ -29,7 +29,7 @@ const PerfilAdmin = () => {
     if(!window.confirm("¿Seguro que quieres borrar este evento?")) return;
 
     try {
-        // Recordamos que tu backend pide el usuarioId para borrar
+        // backend pide el usuarioId para borrar
         await fetch(`http://localhost:8080/api/eventos/${idEvento}?usuarioId=${admin.id}`, {
             method: 'DELETE'
         });
@@ -75,7 +75,6 @@ const PerfilAdmin = () => {
         <div className="admin-header">
           <h1>Panel de Control</h1>
           <div style={{display:'flex', gap:'10px'}}>
-             {/* Este botón nos lleva al formulario de crear que hicimos antes */}
              <Link to="/admin"> 
                 <button className="btn-admin-vista" style={{backgroundColor:'#02b557', color:'white', border:'none'}}>
                     + Crear Nuevo Evento

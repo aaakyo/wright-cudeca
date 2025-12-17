@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-// HEMOS QUITADO LA ETIQUETA @INHERITANCE PORQUE YA NO TIENE HIJOS
 public class Entrada {
 
     @Id

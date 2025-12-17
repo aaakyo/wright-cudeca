@@ -1,12 +1,12 @@
 package com.example.demo.event;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
-// ATENCIÓN: Para evitar errores de compilación, este archivo debe ser renombrado a "SistemaEventos.java"
 @Service
 public class SistemaEventos {
 

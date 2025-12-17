@@ -32,7 +32,7 @@ function Login() {
             // 1. Convertimos la respuesta de Java a un objeto JS
             const usuario = await response.json();
             
-            // 2. ¡IMPORTANTE! Guardamos al usuario en la "mochila" del navegador
+            // Guardamos al usuario en la "mochila" del navegador
             // Esto nos servirá para saber quién está logueado en las otras páginas
             localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
 

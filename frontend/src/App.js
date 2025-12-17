@@ -22,10 +22,8 @@ function App() {
         <Route path="/comprar/:id" element={<ComprarEntrada />} />
         <Route path="/misentradas" element={<MisEntradas />} />
         <Route path="/resultado" element={<ResultadoCompra />} />
-        
-        {/* RUTAS DE ADMINISTRADOR */}
-        <Route path="/adminperfil" element={<PerfilAdmin />} /> {/* El Dashboard */}
-        <Route path="/admin" element={<AdminPanel />} />       {/* El Formulario de Crear */}
+        <Route path="/adminperfil" element={<PerfilAdmin />} /> 
+        <Route path="/admin" element={<AdminPanel />} />       
 
       </Routes>
     </Router>

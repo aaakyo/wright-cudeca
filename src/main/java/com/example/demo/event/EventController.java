@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/eventos")
-@CrossOrigin(origins = "http://localhost:3000") // ¡IMPORTANTE! Añadido para que React pueda hablar con él
+@CrossOrigin(origins = "http://localhost:3000") 
 public class EventController {
 
     private final SistemaEventos sistemaEventos;

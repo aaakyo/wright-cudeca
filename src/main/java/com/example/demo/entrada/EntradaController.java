@@ -58,12 +58,9 @@ public class EntradaController {
             
             if (event != null) {
                 item.put("eventoId", event.getId());
-                // Asegúrate de usar los getters que SÍ existan en tu Event.java
-                // Si getNombre() da error, prueba getName()
                 item.put("nombreEvento", event.getNombre()); 
                 item.put("fecha", event.getFechaInicio()); 
                 
-                // --- CAMBIO AQUÍ: Ponemos una hora por defecto para que no falle ---
                 item.put("hora", "20:00"); 
                 // ------------------------------------------------------------------
             } else {

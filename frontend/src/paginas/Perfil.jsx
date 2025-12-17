@@ -99,7 +99,6 @@ function Perfil() {
                     {editando ? "Cancelar edición" : "Editar perfil"}
                 </button>
                 
-                {/* --- AQUÍ ESTÁ EL CAMBIO CLAVE --- */}
                 {/* Enlazamos el botón al Dashboard de Admin */}
                 <Link to="/adminperfil">
                     <button className="btn-admin">Ver opciones de admin</button>

@@ -31,7 +31,6 @@ function Home() {
           <Link to="/eventos">Eventos</Link>
           <Link to="/perfil">Perfil</Link>
           
-          {/* --- AQUÍ ESTÁ EL CAMBIO MÁGICO --- */}
           {usuario ? (
             /* Si hay usuario, mostramos CERRAR SESIÓN */
             <span 

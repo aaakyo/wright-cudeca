@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "../estilos/cudeca.css"; // Usamos SOLO tu CSS maestro
+import "../estilos/cudeca.css"; 
 
 function Eventos() {
   const navigate = useNavigate();
@@ -76,11 +76,11 @@ function Eventos() {
             </div>
           </div>
 
-          {/* LISTA CON SCROLL (Clase 'lista-scroll' de tu CSS) */}
+          {/* LISTA CON SCROLL */}
           <div className="lista-scroll">
             {eventosFiltrados.map((evento) => (
               
-              <div key={evento.id} className="tarjeta-evento"> {/* Clase correcta de tu CSS */}
+              <div key={evento.id} className="tarjeta-evento"> 
                 
                 <div className="evento-img-wrapper">
                    <img 

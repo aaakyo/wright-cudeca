@@ -32,10 +32,8 @@ public class Event {
     private LocalTime horaFin;
     private String descripcion;
     private String imagen; 
-
-    // --- 1. AÑADIDO AQUÍ ---
     private Double precio;
-    // -----------------------
+  
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Entrada> listaEntradas;
@@ -56,7 +54,7 @@ public class Event {
                  LocalTime horaFin,
                  String descripcion,
                  int metaRecaudacion,
-                 Double precio, // --- 2. AÑADIDO AL CONSTRUCTOR ---
+                 Double precio, 
                  TipoEntrada tipoEntrada,
                  List<Asiento> asientos) {
 
@@ -70,7 +68,7 @@ public class Event {
         this.asientos = asientos;
         this.tipoEntrada = tipoEntrada;
         this.metaRecaudacion = metaRecaudacion;
-        this.precio = precio; // --- Y ASIGNADO AQUÍ ---
+        this.precio = precio; 
         oculto = true;
         listaEntradas = new ArrayList<>();
     }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import "../estilos/cudeca.css";
-// Asegúrate de que importamos el CSS específico que vamos a crear ahora
 import "../estilos/ComprarEntrada.css"; 
 
 function ComprarEntrada() {

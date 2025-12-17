@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EntradaRepository extends JpaRepository<Entrada, Integer> {
-    // ¡Magia! Spring crea el SQL solo con leer el nombre del método
     List<Entrada> findByUsuarioId(Long usuarioId);
 }

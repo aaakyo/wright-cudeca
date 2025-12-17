@@ -23,7 +23,6 @@ public class EntradaService {
         return entradaRepository.findById(id).orElse(null);
     }
 
-    // --- NUEVO MÉTODO ---
     public List<Entrada> getEntradasPorUsuario(Long usuarioId) {
         return entradaRepository.findByUsuarioId(usuarioId);
     }
